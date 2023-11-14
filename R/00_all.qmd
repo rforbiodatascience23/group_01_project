@@ -60,7 +60,10 @@ data <- read_csv("../_raw/diabetes.csv")
 columns_to_replace <- c("Glucose", "Insulin", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
 
 data <- data |> 
-  mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .))
+  mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
+  rename(BP = BloodPressure,
+         Skin_thick = SkinThickness,
+         DPF = DiabetesPedigreeFunction)
 
 View(data)
 ```
