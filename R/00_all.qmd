@@ -109,7 +109,7 @@ The pregnancies attributes corresponds to the number of pregnancies that the pat
 
 ### Plasma Glucose Concentration
 
-This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
+The plasma glucose levels are measured by a 2 hour oral glucose tolerance test (OGTT). This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
 
 ### Diastolic Blood Pressure
 
@@ -134,6 +134,10 @@ This attribute represents the measure of the expected genetic influence of affec
 ### Age 
 
 This attribute shows the age of the patients as a discrete variable. 
+
+### Outcome
+
+This attribute is a class variable (0 or 1), indicating whether the patient has diabetes or not. This a dependent variable, whose value is calculated based on the other aforementioned variables
 
 
 # Augment data
