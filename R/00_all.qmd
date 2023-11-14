@@ -6,7 +6,7 @@ format:
 editor: visual
 ---
 
-# Members
+## Members
 
 -   Anna Lifousi (`s232979`)
 -   Jordan Sylvester Fernandes (`s222497`)
@@ -14,9 +14,9 @@ editor: visual
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
-# Load data
+## Load data
 
-## Load libraries
+### Load libraries
 
 ```{r}
 #| echo: true
@@ -31,7 +31,7 @@ library("table1")
 library("tidyverse")
 ```
 
-## Download diabetes dataset
+### Download diabetes dataset
 
 ```{r}
 #| echo: true
@@ -52,7 +52,7 @@ if(!file.exists(str_c(raw_dir, data_file))){
 }
 ```
 
-# Clean data
+## Clean data
 
 ```{r}
 data <- read_csv("../_raw/diabetes.csv")
@@ -69,10 +69,10 @@ data$Insulin <- ifelse(data$Outcome == 0 & data$Insulin == 0, NA, data$Insulin)
 
 View(data)
 
-write_tsv(data, file = '../data/01_dat_load.tsv.gz')
+write_tsv(data, file = '../data/01_dat_load.tsv')
 ```
 
-# Describe data
+## Describe data
 
 To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
@@ -80,7 +80,13 @@ To address the description of the dataset, we are going calculate the basic stat
 summary(data)
 ```
 
-# Augment data
+# Pregnancies
+The pregnancies attributes corresponds to the number of pregnancies that the patient has had. It only has discrete values that go from 0 to 17, with an median value of 3 pregnancies. 
+
+# Plasma Glucose Concentration
+This attribute descript the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
+
+## Augment data
 
 ...
 
