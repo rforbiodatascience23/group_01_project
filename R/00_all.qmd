@@ -8,9 +8,9 @@ editor: visual
 
 # Members
 
+-   Anna Lifousi (`s232979`)
 -   Jordan Sylvester Fernandes (`s222497`)
 -   Manuel Arcieri (`s230158`)
--   Anna Lifousi (`s232979`)
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
@@ -54,7 +54,16 @@ if(!file.exists(str_c(raw_dir, data_file))){
 
 # Clean data
 
-...
+```{r}
+data <- read_csv("../_raw/diabetes.csv")
+
+columns_to_replace <- c("Glucose", "Insulin", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
+
+data <- data %>%
+  mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .))
+
+View(data)
+```
 
 # Describe data
 
