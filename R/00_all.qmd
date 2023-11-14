@@ -62,14 +62,16 @@ columns_to_replace <- c("Glucose", "Insulin", "BloodPressure", "SkinThickness", 
 data <- data |> 
   mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .))
 
-
-
 View(data)
 ```
 
 # Describe data
+To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
-...
+```{r}
+
+```
+
 
 # Augment data
 
