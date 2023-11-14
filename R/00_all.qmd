@@ -52,10 +52,24 @@ if(!file.exists(str_c(raw_dir, data_file))){
 }
 ```
 
+## Save dataset in data as tsv
+```{r}
+data <- read_csv("../_raw/diabetes.csv")
+
+data_dir <- '../data/'
+
+if (!dir.exists(data_dir)) {
+    dir.create(path = data_dir)
+}
+
+write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
+```
+
+
 # Clean data
 
 ```{r}
-data <- read_csv("../_raw/diabetes.csv")
+data <- read_csv('../data/01_dat_load.tsv.gz')
 
 columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
 
@@ -68,13 +82,7 @@ data <- data |>
 
 View(data)
 
-data_dir <- '../data/'
-
-if (!dir.exists(data_dir)) {
-    dir.create(path = data_dir)
-}
-
-write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
+write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
 ```
 
 # Describe data
@@ -87,7 +95,13 @@ summary(data)
 
 # Augment data
 
-...
+```{R}
+data <- read_csv('../data/02_dat_clean.tsv.gz')
+
+
+
+write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
+```
 
 # Analyse data
 
