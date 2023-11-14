@@ -14,22 +14,56 @@ editor: visual
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
-
 # Load data
-...
 
+## Load libraries
+
+```{r}
+#| echo: true
+#| message: true
+
+library("broom")
+library("patchwork")
+library("purrr")
+library("readr")
+library("stringr")
+library("table1")
+library("tidyverse")
+```
+
+## Download diabetes dataset
+
+```{r}
+#| echo: true
+#| message: true
+
+raw_dir <- "../_raw/"
+data_file <- "diabetes.csv"
+data_loc <- "https://r4bds.trifogli.rip/"
+
+if (!dir.exists(raw_dir)) {
+    dir.create(path = raw_dir)
+}
+
+if(!file.exists(str_c(raw_dir, data_file))){
+  download.file(
+    url = str_c(data_loc, data_file),
+    destfile = str_c(raw_dir, data_file))
+}
+```
 
 # Clean data
-...
 
+...
 
 # Describe data
-...
 
+...
 
 # Augment data
+
 ...
 
-
 # Analyse data
+
 ...
