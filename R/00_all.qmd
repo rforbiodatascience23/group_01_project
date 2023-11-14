@@ -52,8 +52,7 @@ if(!file.exists(str_c(raw_dir, data_file))){
 }
 ```
 
-<<<<<<< HEAD
-## Save dataset in data as tsv
+### Save dataset in data as tsv
 ```{r}
 data <- read_csv("../_raw/diabetes.csv")
 
@@ -66,9 +65,6 @@ if (!dir.exists(data_dir)) {
 write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 ```
 
-
-# Clean data
-=======
 ## Clean data
 
 ```{r}
@@ -97,16 +93,16 @@ data <- read_csv('../data/02_dat_clean.tsv.gz')
 summary(data)
 ```
 
-# Pregnancies
+### Pregnancies
 The pregnancies attributes corresponds to the number of pregnancies that the patient has had. It only has discrete values that go from 0 to 17, with an median value of 3 pregnancies. 
 
-# Plasma Glucose Concentration
+### Plasma Glucose Concentration
 This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
 
-# Diastolic Blood Pressure
+### Diastolic Blood Pressure
 The diastolic blood pressure is a continuous value that has as units mm Hg, and it has as minimum and maximum values 24 mm Hg and 122 mm Hg, respectively. Furthermore, the mean value is 72.41 mm Hg. However, it lacks a true zero point. A blood pressure equal of zero is not the absence of blood pressure; it's a theoretical minimum point.
 
-# Triceps Skin Fold
+### Triceps Skin Fold
 The Skin Thickness attribute describes the triceps skin fold measure, which 
 
 ## Augment data
@@ -119,6 +115,6 @@ data <- read_csv('../data/02_dat_clean.tsv.gz')
 write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 ```
 
-# Analyse data
+## Analyse data
 
 ...
