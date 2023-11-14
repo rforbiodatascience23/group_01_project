@@ -67,7 +67,7 @@ data <- data |>
 
 View(data)
 
-write_tsv(data, file = '../data/01_dat_load.csv.gz')
+write_tsv(data, file = '../data/01_dat_load.tsv.gz')
 ```
 
 # Describe data
