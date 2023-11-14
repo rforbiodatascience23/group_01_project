@@ -63,13 +63,22 @@ data <- data |>
   mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
   rename(BP = BloodPressure,
          Skin_thick = SkinThickness,
-         DPF = DiabetesPedigreeFunction)
-
-data$Insulin <- ifelse(data$Outcome == 0 & data$Insulin == 0, NA, data$Insulin)
+         DPF = DiabetesPedigreeFunction) |>
+  mutate(Insulin = ifelse(Outcome == 0 & Insulin == 0, NA, Insulin))
 
 View(data)
 
+<<<<<<< HEAD
 write_tsv(data, file = '../data/01_dat_load.tsv')
+=======
+data_dir <- '../data/'
+
+if (!dir.exists(data_dir)) {
+    dir.create(path = data_dir)
+}
+
+write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
+>>>>>>> e32922e4fb266e246eae80999855d0be60f1754b
 ```
 
 ## Describe data
