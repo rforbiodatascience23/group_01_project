@@ -56,7 +56,17 @@ if(!file.exists(str_c(raw_dir, data_file))){
 
 ### Save dataset in data as tsv
 ```{r}
-data <- read_csv("../_raw/diabetes.csv")
+data <- read_csv("../_raw/diabetes.csv", col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BloodPressure = col_integer(),
+  SkinThickness = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DiabetesPedigreeFunction = col_number(),
+  Age = col_integer(),
+  Outcome = col_integer()
+))
 
 data_dir <- '../data/'
 
@@ -70,7 +80,17 @@ write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 ## Clean data
 
 ```{r}
-data <- read_tsv('../data/01_dat_load.tsv.gz')
+data <- read_tsv('../data/01_dat_load.tsv.gz', col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BloodPressure = col_integer(),
+  SkinThickness = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DiabetesPedigreeFunction = col_number(),
+  Age = col_integer(),
+  Outcome = col_integer()
+  ))
 
 columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
 
@@ -100,7 +120,17 @@ write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
 To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
 ```{r}
-data <- read_tsv('../data/02_dat_clean.tsv.gz')
+data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BP = col_integer(),
+  Skin_thick = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DPF = col_number(),
+  Age_onset = col_integer(),
+  Outcome = col_integer()
+  ))
 summary(data)
 ```
 
@@ -110,7 +140,7 @@ The pregnancies attributes corresponds to the number of pregnancies that the pat
 
 ### Plasma Glucose Concentration
 
-This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
+The plasma glucose levels are measured by a 2 hour oral glucose tolerance test (OGTT). This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
 
 ### Diastolic Blood Pressure
 
@@ -136,11 +166,25 @@ This attribute represents the measure of the expected genetic influence of affec
 
 This attribute shows the age at onset, at the time of study of the patients as a discrete variable. It has a median value of 29 years of age, a minimum of 21 and a maximum of 81.
 
+### Outcome
+
+This attribute is a class variable (0 or 1), indicating whether the patient has diabetes or not. This a dependent variable, whose value is calculated based on the other aforementioned variables
+
 
 # Augment data
 
 ```{R}
-data <- read_tsv('../data/02_dat_clean.tsv.gz')
+data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BP = col_integer(),
+  Skin_thick = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DPF = col_number(),
+  Age_onset = col_integer(),
+  Outcome = col_integer()
+  ))
 
 write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 ```
