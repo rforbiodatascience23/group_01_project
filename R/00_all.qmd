@@ -131,6 +131,7 @@ data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
   Age_onset = col_integer(),
   Outcome = col_integer()
   ))
+
 summary(data)
 ```
 
