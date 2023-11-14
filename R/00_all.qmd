@@ -117,7 +117,7 @@ data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
   Insulin = col_integer(),
   BMI = col_number(),
   DPF = col_number(),
-  Age = col_integer(),
+  Age_onset = col_integer(),
   Outcome = col_integer()
   ))
 summary(data)
@@ -146,7 +146,7 @@ data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
   Insulin = col_integer(),
   BMI = col_number(),
   DPF = col_number(),
-  Age = col_integer(),
+  Age_onset = col_integer(),
   Outcome = col_integer()
   ))
 
