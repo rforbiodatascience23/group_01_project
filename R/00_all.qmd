@@ -93,7 +93,13 @@ summary(data)
 The pregnancies attributes corresponds to the number of pregnancies that the patient has had. It only has discrete values that go from 0 to 17, with an median value of 3 pregnancies. 
 
 # Plasma Glucose Concentration
-This attribute descript the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
+This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
+
+# Diastolic Blood Pressure
+The diastolic blood pressure is a continuous value that has as units mm Hg, and it has as minimum and maximum values 24 mm Hg and 122 mm Hg, respectively. Furthermore, the mean value is 72.41 mm Hg. However, it lacks a true zero point. A blood pressure equal of zero is not the absence of blood pressure; it's a theoretical minimum point.
+
+# Triceps Skin Fold
+The Skin Thickness attribute describes the triceps skin fold measure, which 
 
 ## Augment data
 
