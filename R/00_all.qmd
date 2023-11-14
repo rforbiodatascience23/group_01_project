@@ -78,7 +78,8 @@ data <- data |>
   mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
   rename(BP = BloodPressure,
          Skin_thick = SkinThickness,
-         DPF = DiabetesPedigreeFunction) |>
+         DPF = DiabetesPedigreeFunction,
+         Age_onset = Age) |>
   mutate(Insulin = ifelse(Outcome == 0 & Insulin == 0, NA, Insulin))
 
 View(data)
@@ -133,15 +134,13 @@ This attribute represents the measure of the expected genetic influence of affec
 
 ### Age 
 
-This attribute shows the age of the patients as a discrete variable. 
+This attribute shows the age at onset, at the time of study of the patients as a discrete variable. It has a median value of 29 years of age, a minimum of 21 and a maximum of 81.
 
 
 # Augment data
 
 ```{R}
 data <- read_tsv('../data/02_dat_clean.tsv.gz')
-
-
 
 write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 ```
