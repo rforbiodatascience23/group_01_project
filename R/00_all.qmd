@@ -63,9 +63,8 @@ data <- data |>
   mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
   rename(BP = BloodPressure,
          Skin_thick = SkinThickness,
-         DPF = DiabetesPedigreeFunction)
-
-data$Insulin <- ifelse(data$Outcome == 0 & data$Insulin == 0, NA, data$Insulin)
+         DPF = DiabetesPedigreeFunction) |>
+  mutate(Insulin = ifelse(Outcome == 0 & Insulin == 0, NA, Insulin))
 
 View(data)
 
