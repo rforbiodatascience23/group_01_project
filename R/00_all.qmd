@@ -112,7 +112,6 @@ if (!dir.exists(data_dir)) {
     dir.create(path = data_dir)
 }
 
-write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
 ```
 
@@ -163,7 +162,11 @@ The Body Mass Index or BMI is a relationship between the weight in kg and the he
 
 This attribute represents the measure of the expected genetic influence of affected and unaffected relatives on the subject. It is a continuous variable and it is a mathematical calculation employed to gauge the probability of diabetes based on family history, typically yielding scores between 0.08 and 2.42. In our dataset it has an average of 0.47.
 
+<<<<<<< HEAD
 ### Age Onset
+=======
+### Age
+>>>>>>> 59d5425ba85cb4de24e927dee166f0664677c62f
 
 This attribute shows the age at onset, at the time of study of the patients as a discrete variable. It has a median value of 29 years of age, a minimum of 21 and a maximum of 81.
 
