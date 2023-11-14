@@ -55,6 +55,7 @@ if(!file.exists(str_c(raw_dir, data_file))){
 # Clean data
 
 ### Save dataset in data as tsv
+
 ```{r}
 data <- read_csv("../_raw/diabetes.csv", col_types = cols(
   Pregnancies = col_integer(),
@@ -146,7 +147,7 @@ The plasma glucose levels are measured by a 2 hour oral glucose tolerance test (
 
 The diastolic blood pressure is a continuous variable that has as units mm Hg, and it has as minimum and maximum values 24 mm Hg and 122 mm Hg, respectively. Furthermore, the mean value is 72.41 mm Hg. However, it lacks a true zero point. A blood pressure equal of zero is not the absence of blood pressure; it's a theoretical minimum point.
 
-### Triceps Skin Fold
+### Triceps Skin Thickness
 
 This attribute describes the depth of adipose tissue in mm. It is a continuous variable with an average of 29.15 mm, and minimum and maximum values of 7 mm and 99 mm, respectively. Skin thickness is also measured on an interval scale and has a meaningful order. Like blood pressure, it lacks a true zero point.
 
@@ -162,14 +163,13 @@ The Body Mass Index or BMI is a relationship between the weight in kg and the he
 
 This attribute represents the measure of the expected genetic influence of affected and unaffected relatives on the subject. It is a continuous variable and it is a mathematical calculation employed to gauge the probability of diabetes based on family history, typically yielding scores between 0.08 and 2.42. In our dataset it has an average of 0.47.
 
-### Age 
+### Age Onset
 
 This attribute shows the age at onset, at the time of study of the patients as a discrete variable. It has a median value of 29 years of age, a minimum of 21 and a maximum of 81.
 
 ### Outcome
 
 This attribute is a class variable (0 or 1), indicating whether the patient has diabetes or not. This a dependent variable, whose value is calculated based on the other aforementioned variables
-
 
 # Augment data
 
@@ -191,4 +191,19 @@ write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 
 ## Analyse data
 
-...
+Scatter plot of all the variables against each other.
+
+Boxplot.
+
+Correlation Heatmap.
+
+Choose linear regression??? Predict the Skin thickness according to the blood pressure.
+
+Goal: predict diabetic or non-diabetic.
+PCA : with the outcome variable.
+
+
+
+
+
+
