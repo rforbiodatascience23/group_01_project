@@ -6,7 +6,7 @@ format:
 editor: visual
 ---
 
-## Members
+# Members
 
 -   Anna Lifousi (`s232979`)
 -   Jordan Sylvester Fernandes (`s222497`)
@@ -14,9 +14,9 @@ editor: visual
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
-## Load data
+# Load data
 
-### Load libraries
+## Load libraries
 
 ```{r}
 #| echo: true
@@ -31,7 +31,7 @@ library("table1")
 library("tidyverse")
 ```
 
-### Download diabetes dataset
+## Download diabetes dataset
 
 ```{r}
 #| echo: true
@@ -51,6 +51,8 @@ if(!file.exists(str_c(raw_dir, data_file))){
     destfile = str_c(raw_dir, data_file))
 }
 ```
+
+# Clean data
 
 ### Save dataset in data as tsv
 ```{r}
@@ -101,10 +103,18 @@ data <- data |>
 
 View(data)
 
+write_tsv(data, file = '../data/01_dat_load.tsv')
+data_dir <- '../data/'
+
+if (!dir.exists(data_dir)) {
+    dir.create(path = data_dir)
+}
+
+write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
 ```
 
-## Describe data
+# Describe data
 
 To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
@@ -124,18 +134,43 @@ summary(data)
 ```
 
 ### Pregnancies
-The pregnancies attributes corresponds to the number of pregnancies that the patient has had. It only has discrete values that go from 0 to 17, with an median value of 3 pregnancies. 
+
+The pregnancies attributes corresponds to the number of pregnancies that the patient has had. It only has discrete values that go from 0 to 17, with an median value of 3 pregnancies.
 
 ### Plasma Glucose Concentration
-This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
+
+The plasma glucose levels are measured by a 2 hour oral glucose tolerance test (OGTT). This attribute shows the concentration of glucose in the patients blood in mg/dL. It has continuous data and the base and max value are 44 mg/dL and 199 mg/dL, accordingly. Moreover, the mean value is 121.7 mg/dL.
 
 ### Diastolic Blood Pressure
-The diastolic blood pressure is a continuous value that has as units mm Hg, and it has as minimum and maximum values 24 mm Hg and 122 mm Hg, respectively. Furthermore, the mean value is 72.41 mm Hg. However, it lacks a true zero point. A blood pressure equal of zero is not the absence of blood pressure; it's a theoretical minimum point.
+
+The diastolic blood pressure is a continuous variable that has as units mm Hg, and it has as minimum and maximum values 24 mm Hg and 122 mm Hg, respectively. Furthermore, the mean value is 72.41 mm Hg. However, it lacks a true zero point. A blood pressure equal of zero is not the absence of blood pressure; it's a theoretical minimum point.
 
 ### Triceps Skin Fold
-The Skin Thickness attribute describes the triceps skin fold measure, which 
 
-## Augment data
+This attribute describes the depth of adipose tissue in mm. It is a continuous variable with an average of 29.15 mm, and minimum and maximum values of 7 mm and 99 mm, respectively. Skin thickness is also measured on an interval scale and has a meaningful order. Like blood pressure, it lacks a true zero point.
+
+### Insulin
+
+This attribute represent the 2-Hour Serum Insulin. The levels of the insulin in the blood are measured in μU/ml and go from 0 to 846 μU/ml, with a mean value of 115 μU/ml. Insulin level in blood is a ratio variable given that it has a true zero point. If the patient is diabetic, we can assume that a 0 value can be plausible since it means that cannot produce insulin by themselves.
+
+### Body Mass Index
+
+The Body Mass Index or BMI is a relationship between the weight in kg and the height in mm of the patient. It is a continuous variable that in our dataset goes from 18.20 kg/mm to 67.10 kg/mm, with an average of 32.36. BMI is considered a ratio variable. It has a true zero point (a BMI of zero indicates the absence of body mass) and can be ranked in meaningful order.
+
+### Diabetes Pedigree Function
+
+This attribute represents the measure of the expected genetic influence of affected and unaffected relatives on the subject. It is a continuous variable and it is a mathematical calculation employed to gauge the probability of diabetes based on family history, typically yielding scores between 0.08 and 2.42. In our dataset it has an average of 0.47.
+
+### Age 
+
+This attribute shows the age of the patients as a discrete variable. 
+
+### Outcome
+
+This attribute is a class variable (0 or 1), indicating whether the patient has diabetes or not. This a dependent variable, whose value is calculated based on the other aforementioned variables
+
+
+# Augment data
 
 ```{R}
 data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
