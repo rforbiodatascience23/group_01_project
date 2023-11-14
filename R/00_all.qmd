@@ -61,7 +61,7 @@ columns_to_replace <- c("Glucose", "Insulin", "BloodPressure", "SkinThickness", 
 
 data <- data |> 
   mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
-  rename(Blood_pressure = BloodPressure,
+  rename(BP = BloodPressure,
          Skin_thick = SkinThickness,
          DPF = DiabetesPedigreeFunction)
 
