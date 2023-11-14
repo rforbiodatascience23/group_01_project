@@ -68,6 +68,8 @@ data <- data |>
 data$Insulin <- ifelse(data$Outcome == 0 & data$Insulin == 0, NA, data$Insulin)
 
 View(data)
+
+write_tsv(data, file = '../data/01_dat_load.tsv.gz')
 ```
 
 # Describe data
