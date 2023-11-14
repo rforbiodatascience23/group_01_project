@@ -57,7 +57,7 @@ if(!file.exists(str_c(raw_dir, data_file))){
 ```{r}
 data <- read_csv("../_raw/diabetes.csv")
 
-columns_to_replace <- c("Glucose", "Insulin", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
+columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
 
 data <- data |> 
   mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
@@ -65,16 +65,18 @@ data <- data |>
          Skin_thick = SkinThickness,
          DPF = DiabetesPedigreeFunction)
 
+data$Insulin <- ifelse(data$Outcome == 0 & data$Insulin == 0, NA, data$Insulin)
+
 View(data)
 ```
 
 # Describe data
+
 To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
 ```{r}
-
+summary(data)
 ```
-
 
 # Augment data
 
