@@ -68,7 +68,7 @@ write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 ## Clean data
 
 ```{r}
-data <- read_csv('../data/01_dat_load.tsv.gz')
+data <- read_tsv('../data/01_dat_load.tsv.gz')
 
 columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
 
@@ -89,7 +89,7 @@ write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
 To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
 ```{r}
-data <- read_csv('../data/02_dat_clean.tsv.gz')
+data <- read_tsv('../data/02_dat_clean.tsv.gz')
 summary(data)
 ```
 
@@ -108,7 +108,7 @@ The Skin Thickness attribute describes the triceps skin fold measure, which
 ## Augment data
 
 ```{R}
-data <- read_csv('../data/02_dat_clean.tsv.gz')
+data <- read_tsv('../data/02_dat_clean.tsv.gz')
 
 
 
