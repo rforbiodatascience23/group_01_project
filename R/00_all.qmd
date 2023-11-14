@@ -1,1 +1,35 @@
+---
+title: "Final project: Group 1"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+# Members
+
+-   Anna Lifousi (`s232979`)
+-   Jordan Sylvester Fernandes (`s222497`)
+-   Manuel Arcieri (`s230158`)
+-   Quim Bech Vilaseca (`s233374`)
+-   Xavier Viñas Margalef (`s233532`)
+
+
+# Load data
+...
+
+
+# Clean data
+...
+
+
+# Describe data
+...
+
+
+# Augment data
+...
+
+
+# Analyse data
 ...
