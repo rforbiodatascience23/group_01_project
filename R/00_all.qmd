@@ -69,7 +69,13 @@ data$Insulin <- ifelse(data$Outcome == 0 & data$Insulin == 0, NA, data$Insulin)
 
 View(data)
 
-write_tsv(data, file = '../data/01_dat_load.tsv.gz')
+data_dir <- '../data/'
+
+if (!dir.exists(data_dir)) {
+    dir.create(path = data_dir)
+}
+
+write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 ```
 
 # Describe data
