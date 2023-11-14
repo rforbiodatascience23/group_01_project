@@ -8,9 +8,9 @@ editor: visual
 
 # Members
 
--   Anna Lifousi (`s232979`)
 -   Jordan Sylvester Fernandes (`s222497`)
 -   Manuel Arcieri (`s230158`)
+-   Anna Lifousi (`s232979`)
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
