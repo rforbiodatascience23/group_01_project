@@ -12,4 +12,4 @@ Correlation Heatmap.
 Choose linear regression??? Predict the Skin thickness according to the blood pressure.
 
 Goal: predict diabetic or non-diabetic.
-PCA : with the outcome variable.
+PCA : with the outcome variable.  --->  Manuel
