@@ -185,14 +185,45 @@ data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
   Age_onset = col_integer(),
   Outcome = col_integer()
   ))
+  
+data <- data |>
+  mutate(BMI_class = case_when(
+    18.5 > BMI ~ "Underweight",
+    18.5 <= BMI & BMI < 25 ~ "Healthy",
+    25 <= BMI & BMI < 30 ~ "Overweight",
+    BMI >= 30 ~ "Obese"),
+    BMI_class = factor(BMI_class, levels = c(
+      "Underweight","Healthy","Overweight","Obese"
+    )))
+
+view(data)
 
 write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 ```
 
 ## Analyse data
+```{r}
+data <- read_tsv('../data/03_dat_aug.tsv.gz', col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BP = col_integer(),
+  Skin_thick = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DPF = col_number(),
+  Age_onset = col_integer(),
+  Outcome = col_integer()
+  ))
 
-Change age_onset to age ranges.
-Change Outcome variable to Diabetic (1) and Non-diabtic (0).
+#Analyzing the correlation between Obesity and diabetes
+
+data |>
+   select(BMI_class, Outcome)
+view()
+```
+
+
+Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
 
 BMI density plot? and Age ranges. Pregnancies?
 
@@ -204,11 +235,4 @@ Correlation Heatmap.
 
 Choose linear regression??? Predict the Skin thickness according to the blood pressure.
 
-Goal: predict diabetic or non-diabetic.
-PCA : with the outcome variable.
-
-
-
-
-
-
+Goal: predict diabetic or non-diabetic. PCA : with the outcome variable.
