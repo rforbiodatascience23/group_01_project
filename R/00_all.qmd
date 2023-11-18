@@ -219,7 +219,6 @@ data <- read_tsv('../data/03_dat_aug.tsv.gz', col_types = cols(
 
 data |>
    select(BMI_class, Outcome)
-view()
 ```
 
 
