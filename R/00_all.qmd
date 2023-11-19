@@ -190,6 +190,17 @@ write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 
 ## Analyse data
 
+```{r}
+Boxplot_pregnancies <- data |> 
+  ggplot(Pregnancies, aes(x = 1, y = data[[col]])) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = paste("Boxplot of", col), x = NULL, y = col)
+library("patchwork")
+Boxplot_pregnancies
+#(NAA_plot + Cr_plot + Cho_plot) + plot_layout(guides = 'collect', ncol = 3)
+```
+
 Change age_onset to age ranges.
 Change Outcome variable to Diabetic (1) and Non-diabtic (0).
 
