@@ -1,0 +1,15 @@
+Change age_onset to age ranges.
+Change Outcome variable to Diabetic (1) and Non-diabtic (0).
+
+BMI density plot? and Age ranges. Pregnancies?
+
+Scatter plot of all the variables against each other.
+
+Boxplot.
+
+Correlation Heatmap.
+
+Choose linear regression??? Predict the Skin thickness according to the blood pressure.
+
+Goal: predict diabetic or non-diabetic.
+PCA : with the outcome variable.  --->  Manuel
