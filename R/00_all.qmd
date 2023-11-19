@@ -241,9 +241,20 @@ data <- data |>
 View(data)
 ```
 
+### Age ranges density plot.
+
+```{r}
+density_age <- ggplot(data, aes(y = Age_range)) +
+  geom_bar() +
+  theme_minimal() +
+  coord_flip()
+density_age
+```
+
+
 Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
 
-BMI density plot? and Age ranges. Pregnancies?
+BMI density plot?  Pregnancies?
 
 Scatter plot of all the variables against each other.
 
