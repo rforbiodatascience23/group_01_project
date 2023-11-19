@@ -192,18 +192,42 @@ write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 ## Analyse data
 
 ```{r}
-Boxplot_pregnancies <- data |> 
-  ggplot(Pregnancies, aes(x = 1, y = data[[col]])) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = paste("Boxplot of", col), x = NULL, y = col)
-library("patchwork")
-Boxplot_pregnancies
-#(NAA_plot + Cr_plot + Cho_plot) + plot_layout(guides = 'collect', ncol = 3)
+Boxplots <- function(attribute) {
+  Boxplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
+    geom_boxplot() +
+    theme_minimal() +
+    labs(x = NULL, y = attribute)
+  return(Boxplot)
+}
+
+Pregnancies <- Boxplots("Pregnancies") +
+  labs(title = paste("Boxplots of all the attributes"))
+
+Glucose <- Boxplots("Glucose")
+
+BP <- Boxplots("BP")+
+  labs(y = "Blood Pressure")
+
+Skin_thick <- Boxplots("Skin_thick") +
+  labs(y = "Skin Thickness")
+
+Insulin <- Boxplots("Insulin")
+
+BMI <- Boxplots("BMI")+
+  labs(y = "Body Mass Index")
+
+DPF <- Boxplots("DPF") +
+  labs(y = "Diabetes Ped. Func.")
+
+Age_onset <- Boxplots("Age_onset") +
+  labs(y = "Age Onset")
+
+combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) + plot_layout(guides = 'collect', ncol = 4) 
+
+combination_plot
 ```
 
-Change age_onset to age ranges.
-Change Outcome variable to Diabetic (1) and Non-diabtic (0).
+Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
 
 BMI density plot? and Age ranges. Pregnancies?
 
@@ -215,11 +239,4 @@ Correlation Heatmap.
 
 Choose linear regression??? Predict the Skin thickness according to the blood pressure.
 
-Goal: predict diabetic or non-diabetic.
-PCA : with the outcome variable.
-
-
-
-
-
-
+Goal: predict diabetic or non-diabetic. PCA : with the outcome variable.
