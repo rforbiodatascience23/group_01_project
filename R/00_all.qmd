@@ -191,6 +191,8 @@ write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 
 ## Analyse data
 
+### Boxplots
+
 ```{r}
 Boxplots <- function(attribute) {
   Boxplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
@@ -225,6 +227,18 @@ Age_onset <- Boxplots("Age_onset") +
 combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) + plot_layout(guides = 'collect', ncol = 4) 
 
 combination_plot
+```
+
+### Add "age_ranges" column with the age of onset values in ranges in intervals of 10
+```{r}
+age_ranges <- c(18, 29, 39, 49, 59, 69, 79, 89, 99)
+
+age_range_labels <- c("18-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-100")
+
+data <- data |> 
+  mutate(Age_range = cut(Age_onset, breaks = age_ranges, labels=age_range_labels))
+
+View(data)
 ```
 
 Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
