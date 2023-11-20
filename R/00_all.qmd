@@ -29,6 +29,8 @@ library("readr")
 library("stringr")
 library("table1")
 library("tidyverse")
+library("corrplot")
+
 ```
 
 ## Download diabetes dataset
@@ -230,6 +232,7 @@ combination_plot
 ```
 
 ### Add "age_ranges" column with the age of onset values in ranges in intervals of 10
+
 ```{r}
 age_ranges <- c(18, 29, 39, 49, 59, 69, 79, 89, 99)
 
@@ -251,10 +254,49 @@ density_age <- ggplot(data, aes(y = Age_range)) +
 density_age
 ```
 
+Correlation Heatmap
+
+```{r}
+install.packages("corrplot")
+
+data_clean_from_nas <- data[complete.cases(data), ]
+
+correlation_matrix <- cor(data_clean_from_nas)
+
+corrplot(correlation_matrix, method = "color", type = "upper", order = "hclust", 
+         tl.col = "black", 
+         col = colorRampPalette(c("#ffffff", "#003f5c", "#7a5195", "#ef5675", "#ffa600"))(200),
+         addCoef.col = "black", number.cex = 0.7,
+         title = "Correlation Heatmap",
+         mar = c(0,0,2,0), # Adjusting margins
+         tl.pos = "lt", # Changing text labels position to left-top
+         tl.offset = 0.5 # Adjusting text label position
+)
+```
+
+### Linear Regression: Skin Thickness vs Blood Pressure
+
+```{r}
+model <- lm(`Skin_thick` ~ BP, data = data)
+
+
+summary(model)
+
+ggplot(data, aes(x = BP, y = Skin_thick)) +
+  geom_point(color = "steelblue", alpha = 0.7, size = 3) +  
+  geom_smooth(method = "lm", se = FALSE, color = "red", size = 1.5) + 
+  labs(x = "Blood Pressure", y = "Skin Thickness", 
+       title = "Linear Regression: Skin Thickness vs Blood Pressure",
+       subtitle = "Relationship between Skin Thickness and Blood Pressure") +
+  theme_minimal() +  
+  theme(plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_text(size = 14, color = "grey")) +
+  guides(color = guide_legend(title = NULL)) 
+```
 
 Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
 
-BMI density plot?  Pregnancies?
+BMI density plot? Pregnancies?
 
 Scatter plot of all the variables against each other.
 
