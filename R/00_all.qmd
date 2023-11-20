@@ -107,7 +107,10 @@ data <- data |>
            Skin_thick = SkinThickness,
            DPF = DiabetesPedigreeFunction,
            Age_onset = Age) |>
-    mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin))
+    mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin)) |>
+    mutate(Outcome = case_when(Outcome == 0 ~ "healthy",
+                               Outcome == 1 ~ "ill")) |>
+    mutate(across(Outcome, as.factor))
 
 
 write_tsv(data, file = str_c(data_dir, '02_dat_clean.tsv.gz'))
@@ -155,7 +158,7 @@ This attribute shows the age at onset, at the time of study of the patients as a
 
 ### Outcome
 
-This attribute is a class variable (0 or 1), indicating whether the patient has diabetes or not. This a dependent variable, whose value is calculated based on the other aforementioned variables
+This attribute is a factor (healthy or ill), indicating whether the patient has diabetes or not. This a dependent variable, whose value is calculated based on the other aforementioned variables
 
 # Augment data
 
@@ -234,7 +237,7 @@ density_age
 ```{r}
 data_clean_from_nas <- data |>
     drop_na() |>
-    select(!Age_range)
+    select(where(is.numeric))
 
 correlation_matrix <- cor(data_clean_from_nas)
 
@@ -268,16 +271,36 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
   guides(color = guide_legend(title = NULL)) 
 ```
 
-Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
+## Principal component analysis
 
-BMI density plot? Pregnancies?
+```{r}
+pca_data <- data |>
+    drop_na()
 
-Scatter plot of all the variables against each other.
+pca_model <- pca_data |>
+    select(where(is.numeric)) |>
+    prcomp(scale. = TRUE)
 
-Boxplot.
+pca_model |>
+    augment(pca_data) |>
+    ggplot(aes(.fittedPC1, .fittedPC2, color = Outcome)) +
+        geom_point(size = 1.8, alpha = 0.6) +
+        theme_minimal() +
+        scale_colour_manual(values = c("#03A9F4", "#F44336")) +
+        labs(x = "PCA component 1", y = "PCA component 2",
+             title = "Principal component analysis")
+```
 
-Correlation Heatmap.
+### Variance explained
 
-Choose linear regression??? Predict the Skin thickness according to the blood pressure.
-
-Goal: predict diabetic or non-diabetic. PCA : with the outcome variable.
+```{r}
+pca_model |>
+    tidy(matrix = "eigenvalues") |>
+    ggplot(aes(PC, percent)) +
+        geom_col(width = 0.6, fill = "#03A9F4") +
+        scale_x_continuous(breaks = 1:9) +
+        scale_y_continuous(labels = scales::percent_format()) +
+        theme_minimal() +
+        labs(x = "Principal component", y = "Variance explained",
+             title = "Variance explained by each principal component")
+```
