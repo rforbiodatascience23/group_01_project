@@ -22,6 +22,8 @@ editor: visual
 #| echo: true
 #| message: true
 
+install.packages("corrplot")
+
 library("broom")
 library("patchwork")
 library("purrr")
@@ -30,7 +32,6 @@ library("stringr")
 library("table1")
 library("tidyverse")
 library("corrplot")
-
 ```
 
 ## Download diabetes dataset
@@ -40,11 +41,17 @@ library("corrplot")
 #| message: true
 
 raw_dir <- "../_raw/"
+data_dir <- '../data/'
+
 data_file <- "diabetes.csv"
 data_loc <- "https://r4bds.trifogli.rip/"
 
 if (!dir.exists(raw_dir)) {
     dir.create(path = raw_dir)
+}
+
+if (!dir.exists(data_dir)) {
+    dir.create(path = data_dir)
 }
 
 if(!file.exists(str_c(raw_dir, data_file))){
@@ -59,23 +66,17 @@ if(!file.exists(str_c(raw_dir, data_file))){
 ### Save dataset in data as tsv
 
 ```{r}
-data <- read_csv("../_raw/diabetes.csv", col_types = cols(
-  Pregnancies = col_integer(),
-  Glucose = col_integer(),
-  BloodPressure = col_integer(),
-  SkinThickness = col_integer(),
-  Insulin = col_integer(),
-  BMI = col_number(),
-  DiabetesPedigreeFunction = col_number(),
-  Age = col_integer(),
-  Outcome = col_integer()
+data <- read_csv(str_c(raw_dir, data_file), col_types = cols(
+    Pregnancies = col_integer(),
+    Glucose = col_integer(),
+    BloodPressure = col_integer(),
+    SkinThickness = col_integer(),
+    Insulin = col_integer(),
+    BMI = col_number(),
+    DiabetesPedigreeFunction = col_number(),
+    Age = col_integer(),
+    Outcome = col_integer()
 ))
-
-data_dir <- '../data/'
-
-if (!dir.exists(data_dir)) {
-    dir.create(path = data_dir)
-}
 
 write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 ```
@@ -83,38 +84,33 @@ write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
 ## Clean data
 
 ```{r}
-data <- read_tsv('../data/01_dat_load.tsv.gz', col_types = cols(
-  Pregnancies = col_integer(),
-  Glucose = col_integer(),
-  BloodPressure = col_integer(),
-  SkinThickness = col_integer(),
-  Insulin = col_integer(),
-  BMI = col_number(),
-  DiabetesPedigreeFunction = col_number(),
-  Age = col_integer(),
-  Outcome = col_integer()
-  ))
+data <- read_tsv(str_c(data_dir, '01_dat_load.tsv.gz'), col_types = cols(
+    Pregnancies = col_integer(),
+    Glucose = col_integer(),
+    BloodPressure = col_integer(),
+    SkinThickness = col_integer(),
+    Insulin = col_integer(),
+    BMI = col_number(),
+    DiabetesPedigreeFunction = col_number(),
+    Age = col_integer(),
+    Outcome = col_integer()
+))
 
-columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness", "BMI","DiabetesPedigreeFunction", "Age")
+columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness",
+                        "BMI","DiabetesPedigreeFunction", "Age")
+
+remove_if_zero <- function(value) (if_else(value == 0, NA, value))
 
 data <- data |> 
-  mutate_at(.vars = columns_to_replace, ~ifelse(. == 0, NA, .)) |>
-  rename(BP = BloodPressure,
-         Skin_thick = SkinThickness,
-         DPF = DiabetesPedigreeFunction,
-         Age_onset = Age) |>
-  mutate(Insulin = ifelse(Outcome == 0 & Insulin == 0, NA, Insulin))
+    mutate_at(.vars = columns_to_replace, remove_if_zero) |>
+    rename(BP = BloodPressure,
+           Skin_thick = SkinThickness,
+           DPF = DiabetesPedigreeFunction,
+           Age_onset = Age) |>
+    mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin))
 
-View(data)
 
-write_tsv(data, file = '../data/01_dat_load.tsv')
-data_dir <- '../data/'
-
-if (!dir.exists(data_dir)) {
-    dir.create(path = data_dir)
-}
-
-write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
+write_tsv(data, file = str_c(data_dir, '02_dat_clean.tsv.gz'))
 ```
 
 # Describe data
@@ -122,18 +118,6 @@ write_tsv(data, file = '../data/02_dat_clean.tsv.gz')
 To address the description of the dataset, we are going calculate the basic statistics of the dataset, and also what they are about.
 
 ```{r}
-data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
-  Pregnancies = col_integer(),
-  Glucose = col_integer(),
-  BP = col_integer(),
-  Skin_thick = col_integer(),
-  Insulin = col_integer(),
-  BMI = col_number(),
-  DPF = col_number(),
-  Age_onset = col_integer(),
-  Outcome = col_integer()
-  ))
-
 summary(data)
 ```
 
@@ -176,19 +160,10 @@ This attribute is a class variable (0 or 1), indicating whether the patient has 
 # Augment data
 
 ```{R}
-data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
-  Pregnancies = col_integer(),
-  Glucose = col_integer(),
-  BP = col_integer(),
-  Skin_thick = col_integer(),
-  Insulin = col_integer(),
-  BMI = col_number(),
-  DPF = col_number(),
-  Age_onset = col_integer(),
-  Outcome = col_integer()
-  ))
+# Work with "data"
+# ...
 
-write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
+write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
 ```
 
 ## Analyse data
@@ -197,36 +172,37 @@ write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
 
 ```{r}
 Boxplots <- function(attribute) {
-  Boxplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
-    geom_boxplot() +
-    theme_minimal() +
-    labs(x = NULL, y = attribute)
-  return(Boxplot)
+    Boxplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
+               geom_boxplot() +
+               theme_minimal() +
+               labs(x = NULL, y = attribute)
+    return(Boxplot)
 }
 
 Pregnancies <- Boxplots("Pregnancies") +
-  labs(title = paste("Boxplots of all the attributes"))
+    labs(title = paste("Boxplots of all the attributes"))
 
 Glucose <- Boxplots("Glucose")
 
 BP <- Boxplots("BP")+
-  labs(y = "Blood Pressure")
+    labs(y = "Blood Pressure")
 
 Skin_thick <- Boxplots("Skin_thick") +
-  labs(y = "Skin Thickness")
+    labs(y = "Skin Thickness")
 
 Insulin <- Boxplots("Insulin")
 
 BMI <- Boxplots("BMI")+
-  labs(y = "Body Mass Index")
+    labs(y = "Body Mass Index")
 
 DPF <- Boxplots("DPF") +
-  labs(y = "Diabetes Ped. Func.")
+    labs(y = "Diabetes Ped. Func.")
 
 Age_onset <- Boxplots("Age_onset") +
-  labs(y = "Age Onset")
+    labs(y = "Age Onset")
 
-combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) + plot_layout(guides = 'collect', ncol = 4) 
+combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
+    plot_layout(guides = 'collect', ncol = 4) 
 
 combination_plot
 ```
@@ -239,27 +215,26 @@ age_ranges <- c(18, 29, 39, 49, 59, 69, 79, 89, 99)
 age_range_labels <- c("18-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-100")
 
 data <- data |> 
-  mutate(Age_range = cut(Age_onset, breaks = age_ranges, labels=age_range_labels))
-
-View(data)
+    mutate(Age_range = cut(Age_onset, breaks = age_ranges, labels=age_range_labels))
 ```
 
 ### Age ranges density plot.
 
 ```{r}
 density_age <- ggplot(data, aes(y = Age_range)) +
-  geom_bar() +
-  theme_minimal() +
-  coord_flip()
+    geom_bar() +
+    theme_minimal() +
+    coord_flip()
+
 density_age
 ```
 
-Correlation Heatmap
+### Correlation Heatmap
 
 ```{r}
-install.packages("corrplot")
-
-data_clean_from_nas <- data[complete.cases(data), ]
+data_clean_from_nas <- data |>
+    drop_na() |>
+    select(!Age_range)
 
 correlation_matrix <- cor(data_clean_from_nas)
 
@@ -280,9 +255,6 @@ aa
 
 ```{r}
 model <- lm(`Skin_thick` ~ BP, data = data)
-
-
-summary(model)
 
 ggplot(data, aes(x = BP, y = Skin_thick)) +
   geom_point(color = "steelblue", alpha = 0.7, size = 3) +  
