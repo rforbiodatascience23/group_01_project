@@ -263,7 +263,7 @@ data_clean_from_nas <- data[complete.cases(data), ]
 
 correlation_matrix <- cor(data_clean_from_nas)
 
-corrplot(correlation_matrix, method = "color", type = "upper", order = "hclust", 
+corrplot(correlation_matrix, method = "color", type = "full", order = "hclust", 
          tl.col = "black", 
          col = colorRampPalette(c("#ffffff", "#003f5c", "#7a5195", "#ef5675", "#ffa600"))(200),
          addCoef.col = "black", number.cex = 0.7,
