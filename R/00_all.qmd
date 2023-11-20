@@ -276,6 +276,8 @@ corrplot(correlation_matrix, method = "color", type = "upper", order = "hclust",
 
 ### Linear Regression: Skin Thickness vs Blood Pressure
 
+aa
+
 ```{r}
 model <- lm(`Skin_thick` ~ BP, data = data)
 
