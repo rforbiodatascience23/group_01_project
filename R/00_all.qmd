@@ -24,6 +24,3 @@ editor: visual
 
 {{< include 05_analysis.qmd >}}
 
-```{r}
-quarto_render("00_all.qmd")
-```
