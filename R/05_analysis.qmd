@@ -162,3 +162,10 @@ pca_model |>
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component")
 ```
+
+### BMI class distribution
+
+```{r}
+
+```
+
