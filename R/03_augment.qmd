@@ -1,7 +1,35 @@
 ---
-title: "04_augment.qmd"
+title: "03_augment.qmd"
 format:
   html:
     embed-resources: true
 editor: visual
 ---
+
+# Augment data
+
+```{R}
+data <- read_tsv(str_c(data_dir, '02_dat_clean.tsv.gz'), col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BP = col_integer(),
+  Skin_thick = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DPF = col_number(),
+  Age_onset = col_integer(),
+  Outcome = col_factor()
+  ))
+  
+data <- data |>
+  mutate(BMI_class = case_when(
+    18.5 > BMI ~ "Underweight",
+    18.5 <= BMI & BMI < 25 ~ "Healthy",
+    25 <= BMI & BMI < 30 ~ "Overweight",
+    BMI >= 30 ~ "Obese"),
+    BMI_class = factor(BMI_class, levels = c(
+      "Underweight","Healthy","Overweight","Obese"
+    )))
+
+write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
+```

@@ -5,3 +5,48 @@ format:
     embed-resources: true
 editor: visual
 ---
+
+# Load data
+
+## Load libraries
+
+```{r}
+#| echo: true
+#| message: true
+
+library("broom")
+library("patchwork")
+library("purrr")
+library("readr")
+library("stringr")
+library("table1")
+library("tidyverse")
+library("corrplot")
+```
+
+## Download diabetes dataset
+
+```{r}
+#| echo: true
+#| message: true
+
+raw_dir <- "../_raw/"
+data_dir <- '../data/'
+
+data_file <- "diabetes.csv"
+data_loc <- "https://r4bds.trifogli.rip/"
+
+if (!dir.exists(raw_dir)) {
+    dir.create(path = raw_dir)
+}
+
+if (!dir.exists(data_dir)) {
+    dir.create(path = data_dir)
+}
+
+if(!file.exists(str_c(raw_dir, data_file))){
+  download.file(
+    url = str_c(data_loc, data_file),
+    destfile = str_c(raw_dir, data_file))
+}
+```
