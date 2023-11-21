@@ -63,6 +63,7 @@ Age_onset <- Boxplots("Age_onset") +
 
 combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
     plot_layout(guides = 'collect', ncol = 4) 
+ggsave("../results/boxplot.png")
 
 combination_plot
 ```
@@ -107,6 +108,8 @@ combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + D
     plot_layout(guides = 'collect', ncol = 4) 
 
 combination_plot
+ggsave("../results/violin_plot.png")
+
 ```
 
 ### Add "age_ranges" column with the age of onset values in ranges in intervals of 10
@@ -132,6 +135,8 @@ density_age <- ggplot(data, aes(y = Age_range)) +
     coord_flip()
 
 density_age
+ggsave("../results/density_age.png")
+
 ```
 
 ### Correlation Heatmap
@@ -152,6 +157,8 @@ corrplot(correlation_matrix, method = "color", type = "full", order = "hclust",
          tl.pos = "lt", # Changing text labels position to left-top
          tl.offset = 0.5 # Adjusting text label position
 )
+ggsave("../results/heatmap.png")
+
 ```
 
 ### Linear Regression: Skin Thickness vs Blood Pressure
@@ -169,7 +176,9 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
   theme_minimal() +  
   theme(plot.title = element_text(size = 14, face = "bold"),
         plot.subtitle = element_text(size = 10, color = "black")) +
-  guides(color = guide_legend(title = NULL)) 
+  guides(color = guide_legend(title = NULL))
+ggsave("../results/linear_reg.png")
+
 ```
 
 ### Principal component analysis
@@ -191,6 +200,8 @@ pca_model |>
         labs(x = "PCA component 1", y = "PCA component 2",
              title = "Principal component analysis") + 
         theme(plot.title = element_text(hjust = 0.5))
+ggsave("../results/PCA.png")
+
 ```
 
 ### Variance explained
@@ -208,6 +219,8 @@ pca_model |>
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component") + 
         theme(plot.title = element_text(hjust = 0.5))
+ggsave("../results/PCA_Var.png")
+
 ```
 
 ### BMI class distribution
