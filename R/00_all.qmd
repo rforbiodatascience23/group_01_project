@@ -261,7 +261,7 @@ model <- lm(`Skin_thick` ~ BP, data = data)
 
 ggplot(data, aes(x = BP, y = Skin_thick)) +
   geom_point(color = "steelblue", alpha = 0.7, size = 3) +  
-  geom_smooth(method = "lm", se = FALSE, color = "red", size = 1.5) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.5) + 
   labs(x = "Blood Pressure", y = "Skin Thickness", 
        title = "Linear Regression: Skin Thickness vs Blood Pressure",
        subtitle = "Relationship between Skin Thickness and Blood Pressure") +
