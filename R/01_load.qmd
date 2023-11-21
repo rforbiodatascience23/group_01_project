@@ -13,7 +13,6 @@ editor: visual
 ```{r}
 #| echo: true
 #| message: true
-
 library("broom")
 library("patchwork")
 library("purrr")
@@ -22,6 +21,7 @@ library("stringr")
 library("table1")
 library("tidyverse")
 library("corrplot")
+library("quarto")
 ```
 
 ## Download diabetes dataset

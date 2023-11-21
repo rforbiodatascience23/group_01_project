@@ -23,3 +23,7 @@ editor: visual
 {{< include 04_describe.qmd >}}
 
 {{< include 05_analysis.qmd >}}
+
+```{r}
+quarto_render("00_all.qmd")
+```
