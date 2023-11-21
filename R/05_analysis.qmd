@@ -166,36 +166,31 @@ pca_model |>
 ### BMI class distribution
 
 ```{r}
-rows <- nrow(data)
-id <- seq(1, rows, by=1)
 
-pivot_data <- data |>
-  select(BMI_class, BMI) |>
-  mutate(id) |> 
+rows <- nrow(data)
+id <- seq(1, rows, by = 1)
+
+pivot_data <- data %>%
+  select(BMI_class, BMI) %>%
+  mutate(id) %>%
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
-              id_cols = id) |> 
-  select(c(-id,-"NA"))
-#View(pivot_data)
+              id_cols = id) %>%
+  select(-id, -"NA")
 
 non_na_counts <- colSums(!is.na(pivot_data[, !(names(pivot_data) %in% c("id", "NA"))]))
 
+# Create a data frame for ggplot
+pivot_data_plot <- data.frame(columns = names(non_na_counts), count = non_na_counts)
 
-barplot(non_na_counts,
-        main = "Number of Non-NA Values in Each Column",
-        xlab = "Columns",
-        ylab = "Count",
-        col = c("#FF9999", "#66B2FF", "#99FF99"),
-        border = "black", 
-        space = 0.5,
-        width = 0.7, 
-        las = 1, 
-        ylim = c(0, max(non_na_counts) * 1.2), 
-        beside = TRUE, 
-        axis.lty = 1, 
-        cex.axis = 0.8,
-        cex.names = 0.8, 
-        cex.lab = 0.9, 
-        axes = TRUE 
-)
+
+# Plot using ggplot2
+ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7, color = "black") +
+  labs(
+    title = "Number of diabetes cases in different BMI class",
+    y = "Count"
+  ) +
+  theme_minimal() 
+
 ```
