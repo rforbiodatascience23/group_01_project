@@ -83,8 +83,9 @@ head(data)
 
 ```{r}
 density_age <- ggplot(data, aes(y = Age_range)) +
-    geom_bar() +
+    geom_bar(fill = "purple") +
     theme_minimal() +
+    labs(x = "Age Range", y = "Count", title = "Age distribution in the dataset")+
     coord_flip()
 
 density_age
@@ -127,7 +128,7 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
   guides(color = guide_legend(title = NULL)) 
 ```
 
-### Principal component analysis
+## Principal component analysis
 
 ```{r}
 pca_data <- data |>
@@ -174,7 +175,7 @@ pivot_data <- data |>
   mutate(id) |> 
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
-              id_cols = id) |> 
+              id_cols = id) #|> 
   select(c(-id,-"NA"))
 View(pivot_data)
 ```
