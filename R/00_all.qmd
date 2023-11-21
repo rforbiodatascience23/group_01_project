@@ -304,7 +304,7 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
        subtitle = "Relationship between Skin Thickness and Blood Pressure") +
   theme_minimal() +  
   theme(plot.title = element_text(size = 14, face = "bold"),
-        plot.subtitle = element_text(size = 10, color = "black")) +
+        plot.subtitle = element_text(size = 10, color = "gray")) +
   guides(color = guide_legend(title = NULL)) 
 ```
 
