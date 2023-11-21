@@ -20,7 +20,7 @@ data <- read_csv(str_c(raw_dir, data_file), col_types = cols(
     BMI = col_number(),
     DiabetesPedigreeFunction = col_number(),
     Age = col_integer(),
-    Outcome = col_integer()
+    Outcome = col_factor()
 ))
 
 write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))

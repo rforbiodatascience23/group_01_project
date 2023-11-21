@@ -127,7 +127,7 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
   guides(color = guide_legend(title = NULL)) 
 ```
 
-## Principal component analysis
+### Principal component analysis
 
 ```{r}
 pca_data <- data |>
