@@ -14,26 +14,16 @@ editor: visual
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
-# Load data
 
-## Load libraries
+{{< include 01_load.qmd >}}
 
-```{r}
-#| echo: true
-#| message: true
+{{< include 02_clean.qmd >}}
 
-library("broom")
-library("patchwork")
-library("purrr")
-library("readr")
-library("stringr")
-library("table1")
-library("tidyverse")
-library("corrplot")
-```
+{{< include 03_augment.qmd >}}
 
-## Download diabetes dataset
+{{< include 04_describe.qmd >}}
 
+<<<<<<< HEAD
 ```{r}
 #| echo: true
 #| message: true
@@ -343,3 +333,6 @@ pca_model |>
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component")
 ```
+=======
+{{< include 05_analysis.qmd >}}
+>>>>>>> cbea20126b1e1f0b95f4c70a9691ad87c752fcba

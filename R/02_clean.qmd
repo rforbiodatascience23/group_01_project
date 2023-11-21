@@ -5,3 +5,57 @@ format:
     embed-resources: true
 editor: visual
 ---
+
+# Clean data
+
+### Save dataset in data as tsv
+
+```{r}
+data <- read_csv(str_c(raw_dir, data_file), col_types = cols(
+    Pregnancies = col_integer(),
+    Glucose = col_integer(),
+    BloodPressure = col_integer(),
+    SkinThickness = col_integer(),
+    Insulin = col_integer(),
+    BMI = col_number(),
+    DiabetesPedigreeFunction = col_number(),
+    Age = col_integer(),
+    Outcome = col_integer()
+))
+
+write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
+```
+
+### Data cleaning
+
+```{r}
+data <- read_tsv(str_c(data_dir, '01_dat_load.tsv.gz'), col_types = cols(
+    Pregnancies = col_integer(),
+    Glucose = col_integer(),
+    BloodPressure = col_integer(),
+    SkinThickness = col_integer(),
+    Insulin = col_integer(),
+    BMI = col_number(),
+    DiabetesPedigreeFunction = col_number(),
+    Age = col_integer(),
+    Outcome = col_integer()
+))
+
+columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness",
+                        "BMI","DiabetesPedigreeFunction", "Age")
+
+remove_if_zero <- function(value) (if_else(value == 0, NA, value))
+
+data <- data |> 
+    mutate_at(.vars = columns_to_replace, remove_if_zero) |>
+    rename(BP = BloodPressure,
+           Skin_thick = SkinThickness,
+           DPF = DiabetesPedigreeFunction,
+           Age_onset = Age) |>
+    mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin)) |>
+    mutate(Outcome = case_when(Outcome == 0 ~ "Healthy",
+                               Outcome == 1 ~ "Diabetes")) |>
+    mutate(across(Outcome, as.factor))
+
+write_tsv(data, file = str_c(data_dir, '02_dat_clean.tsv.gz'))
+```
