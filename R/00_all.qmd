@@ -22,6 +22,7 @@ editor: visual
 
 {{< include 04_describe.qmd >}}
 
+<<<<<<< HEAD
 ```{r}
 #| echo: true
 #| message: true
@@ -331,4 +332,6 @@ pca_model |>
              title = "Variance explained by each principal component")
 ```
 
+=======
+>>>>>>> 5356400d182f59c9084fe640d2c58036640b23cb
 {{< include 05_analysis.qmd >}}
