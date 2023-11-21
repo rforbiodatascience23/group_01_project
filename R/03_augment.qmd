@@ -26,7 +26,6 @@ data <- read_tsv(str_c(data_dir, '02_dat_clean.tsv.gz'), col_types = cols(
 
 ```{R}
 data <- data |> 
-    mutate_at(.vars = columns_to_replace, remove_if_zero) |>
     rename(BP = BloodPressure,
            Skin_thick = SkinThickness,
            DPF = DiabetesPedigreeFunction,

@@ -20,7 +20,7 @@ data <- read_csv(str_c(raw_dir, data_file), col_types = cols(
     BMI = col_number(),
     DiabetesPedigreeFunction = col_number(),
     Age = col_integer(),
-    Outcome = col_factor()
+    Outcome = col_integer()
 ))
 
 write_tsv(data, file = str_c(data_dir, '01_dat_load.tsv.gz'))
@@ -45,6 +45,9 @@ columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness",
                         "BMI","DiabetesPedigreeFunction", "Age")
 
 remove_if_zero <- function(value) (if_else(value == 0, NA, value))
+
+data <- data |> 
+    mutate_at(.vars = columns_to_replace, remove_if_zero)
 
 write_tsv(data, file = str_c(data_dir, '02_dat_clean.tsv.gz'))
 ```
