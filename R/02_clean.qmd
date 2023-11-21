@@ -46,16 +46,5 @@ columns_to_replace <- c("Glucose", "BloodPressure", "SkinThickness",
 
 remove_if_zero <- function(value) (if_else(value == 0, NA, value))
 
-data <- data |> 
-    mutate_at(.vars = columns_to_replace, remove_if_zero) |>
-    rename(BP = BloodPressure,
-           Skin_thick = SkinThickness,
-           DPF = DiabetesPedigreeFunction,
-           Age_onset = Age) |>
-    mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin)) |>
-    mutate(Outcome = case_when(Outcome == 0 ~ "Healthy",
-                               Outcome == 1 ~ "Diabetes")) |>
-    mutate(across(Outcome, as.factor))
-
 write_tsv(data, file = str_c(data_dir, '02_dat_clean.tsv.gz'))
 ```
