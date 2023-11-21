@@ -14,7 +14,6 @@ editor: visual
 -   Quim Bech Vilaseca (`s233374`)
 -   Xavier Viñas Margalef (`s233532`)
 
-
 {{< include 01_load.qmd >}}
 
 {{< include 02_clean.qmd >}}
@@ -23,7 +22,6 @@ editor: visual
 
 {{< include 04_describe.qmd >}}
 
-<<<<<<< HEAD
 ```{r}
 #| echo: true
 #| message: true
@@ -197,7 +195,6 @@ data |>
    select(BMI_class, Outcome)
 ```
 
-
 ### Boxplots
 
 ```{r}
@@ -333,6 +330,5 @@ pca_model |>
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component")
 ```
-=======
+
 {{< include 05_analysis.qmd >}}
->>>>>>> cbea20126b1e1f0b95f4c70a9691ad87c752fcba
