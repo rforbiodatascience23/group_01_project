@@ -176,5 +176,26 @@ pivot_data <- data |>
               values_from = BMI,
               id_cols = id) |> 
   select(c(-id,-"NA"))
-View(pivot_data)
+#View(pivot_data)
+
+non_na_counts <- colSums(!is.na(pivot_data[, !(names(pivot_data) %in% c("id", "NA"))]))
+
+
+barplot(non_na_counts,
+        main = "Number of Non-NA Values in Each Column",
+        xlab = "Columns",
+        ylab = "Count",
+        col = c("#FF9999", "#66B2FF", "#99FF99"),
+        border = "black", 
+        space = 0.5,
+        width = 0.7, 
+        las = 1, 
+        ylim = c(0, max(non_na_counts) * 1.2), 
+        beside = TRUE, 
+        axis.lty = 1, 
+        cex.axis = 0.8,
+        cex.names = 0.8, 
+        cex.lab = 0.9, 
+        axes = TRUE 
+)
 ```
