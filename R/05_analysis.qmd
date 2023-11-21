@@ -76,7 +76,7 @@ Violinplots <- function(attribute) {
                geom_violin(fill="#A4A4A4", color="darkred") +
                theme_minimal() +
                labs(x = NULL, y = attribute) + 
-               geom_boxplot(width=0.1) + 
+               geom_boxplot(width=0.2) + 
                stat_summary(fun.y=mean, geom="point", size=2, color="red")
     return(Violinplot)
 }
