@@ -30,6 +30,7 @@ data |>
 ### Boxplots
 
 ```{r}
+#| warning: false
 Boxplots <- function(attribute) {
     Boxplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
                geom_boxplot() +
@@ -62,8 +63,53 @@ Age_onset <- Boxplots("Age_onset") +
 
 combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
     plot_layout(guides = 'collect', ncol = 4) 
+ggsave("../results/boxplot.png")
 
 combination_plot
+```
+
+### Violin Plots
+
+```{r}
+#| warning: false
+Violinplots <- function(attribute) {
+    Violinplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
+               geom_violin(fill="#03A9F4") +
+               theme_minimal() +
+               labs(x = NULL, y = attribute) + 
+               geom_boxplot(width=0.2) + 
+               stat_summary(fun.y=mean, geom="point", size=2, color="red")
+    return(Violinplot)
+}
+
+Pregnancies <- Violinplots("Pregnancies") +
+    labs(title = paste("Violin plots of all the attributes"))
+
+Glucose <- Violinplots("Glucose")
+
+BP <- Violinplots("BP")+
+    labs(y = "Blood Pressure")
+
+Skin_thick <- Violinplots("Skin_thick") +
+    labs(y = "Skin Thickness")
+
+Insulin <- Violinplots("Insulin")
+
+BMI <- Violinplots("BMI")+
+    labs(y = "Body Mass Index")
+
+DPF <- Violinplots("DPF") +
+    labs(y = "Diabetes Ped. Func.")
+
+Age_onset <- Violinplots("Age_onset") +
+    labs(y = "Age Onset")
+
+combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
+    plot_layout(guides = 'collect', ncol = 4) 
+
+combination_plot
+ggsave("../results/violin_plot.png")
+
 ```
 
 ### Add "age_ranges" column with the age of onset values in ranges in intervals of 10
@@ -83,11 +129,14 @@ head(data)
 
 ```{r}
 density_age <- ggplot(data, aes(y = Age_range)) +
-    geom_bar() +
+    geom_bar(fill = "#7a5195") +
     theme_minimal() +
+    labs(x = "Age Range", y = "Count", title = "Age distribution in the dataset")+
     coord_flip()
 
 density_age
+ggsave("../results/density_age.png")
+
 ```
 
 ### Correlation Heatmap
@@ -108,23 +157,28 @@ corrplot(correlation_matrix, method = "color", type = "full", order = "hclust",
          tl.pos = "lt", # Changing text labels position to left-top
          tl.offset = 0.5 # Adjusting text label position
 )
+ggsave("../results/heatmap.png")
+
 ```
 
 ### Linear Regression: Skin Thickness vs Blood Pressure
 
 ```{r}
+#| warning: false
 model <- lm(`Skin_thick` ~ BP, data = data)
 
 ggplot(data, aes(x = BP, y = Skin_thick)) +
   geom_point(color = "steelblue", alpha = 0.7, size = 3) +  
-  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.5) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.5, formula = 'y ~ x') + 
   labs(x = "Blood Pressure", y = "Skin Thickness", 
        title = "Linear Regression: Skin Thickness vs Blood Pressure",
        subtitle = "Relationship between Skin Thickness and Blood Pressure") +
   theme_minimal() +  
   theme(plot.title = element_text(size = 14, face = "bold"),
         plot.subtitle = element_text(size = 10, color = "black")) +
-  guides(color = guide_legend(title = NULL)) 
+  guides(color = guide_legend(title = NULL))
+ggsave("../results/linear_reg.png")
+
 ```
 
 ### Principal component analysis
@@ -142,9 +196,12 @@ pca_model |>
     ggplot(aes(.fittedPC1, .fittedPC2, color = Outcome)) +
         geom_point(size = 1.8, alpha = 0.6) +
         theme_minimal() +
-        scale_colour_manual(values = c("#03A9F4", "#F44336")) +
+        scale_colour_manual(values = c("#F44336", "#03A9F4")) +
         labs(x = "PCA component 1", y = "PCA component 2",
-             title = "Principal component analysis")
+             title = "Principal component analysis") + 
+        theme(plot.title = element_text(hjust = 0.5))
+ggsave("../results/PCA.png")
+
 ```
 
 ### Variance explained
@@ -160,7 +217,10 @@ pca_model |>
         scale_y_continuous(labels = scales::percent_format()) +
         theme_minimal() +
         labs(x = "Principal components", y = "Variance explained",
-             title = "Variance explained by each principal component")
+             title = "Variance explained by each principal component") + 
+        theme(plot.title = element_text(hjust = 0.5))
+ggsave("../results/PCA_Var.png")
+
 ```
 
 ### BMI class distribution
@@ -175,6 +235,7 @@ pivot_data <- data %>%
   mutate(id) %>%
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
+<<<<<<< HEAD
               id_cols = id) %>%
   select(-id, -"NA")
 
@@ -193,4 +254,10 @@ ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
   ) +
   theme_minimal() 
 
+=======
+              id_cols = id) |> 
+  select(c(-id,-"NA"))
+
+head(pivot_data)
+>>>>>>> f8065a4c43adf82e069402271d3c5917a4902f83
 ```

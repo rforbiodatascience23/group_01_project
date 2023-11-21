@@ -18,9 +18,27 @@ data <- read_tsv(str_c(data_dir, '02_dat_clean.tsv.gz'), col_types = cols(
   BMI = col_number(),
   DPF = col_number(),
   Age_onset = col_integer(),
-  Outcome = col_factor()
+  Outcome = col_integer()
   ))
-  
+```
+
+### Change the Outcome values from binary to Healthy/Diabetes
+
+```{R}
+data <- data |> 
+    rename(BP = BloodPressure,
+           Skin_thick = SkinThickness,
+           DPF = DiabetesPedigreeFunction,
+           Age_onset = Age) |>
+    mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin)) |>
+    mutate(Outcome = case_when(Outcome == 0 ~ "Healthy",
+                               Outcome == 1 ~ "Diabetes")) |>
+    mutate(across(Outcome, as.factor))
+```
+
+### Add a column with the classification of BMI according to the values.
+
+```{R}
 data <- data |>
   mutate(BMI_class = case_when(
     18.5 > BMI ~ "Underweight",
@@ -30,6 +48,26 @@ data <- data |>
     BMI_class = factor(BMI_class, levels = c(
       "Underweight","Healthy","Overweight","Obese"
     )))
-
-write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
 ```
+
+### Add "age_ranges" column with the age of onset values in ranges in intervals of 10
+
+```{R}
+age_ranges <- c(18, 29, 39, 49, 59, 69, 79, 89, 99)
+
+age_range_labels <- c("18-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-100")
+
+data <- data |> 
+    mutate(Age_range = cut(Age_onset, breaks = age_ranges, labels=age_range_labels))
+
+head(data)
+```
+
+
+### Save it into a TSV file
+
+```{R}
+write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
+
+```
+
