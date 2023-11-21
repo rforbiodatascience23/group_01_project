@@ -22,8 +22,6 @@ editor: visual
 #| echo: true
 #| message: true
 
-install.packages("corrplot")
-
 library("broom")
 library("patchwork")
 library("purrr")
@@ -108,10 +106,10 @@ data <- data |>
            DPF = DiabetesPedigreeFunction,
            Age_onset = Age) |>
     mutate(Insulin = if_else(Outcome == 0 & Insulin == 0, NA, Insulin)) |>
-    mutate(Outcome = case_when(Outcome == 0 ~ "healthy",
-                               Outcome == 1 ~ "ill")) |>
+    mutate(Outcome = case_when(Outcome == 0 ~ "Healthy",
+                               Outcome == 1 ~ "Diabetes")) |>
     mutate(across(Outcome, as.factor))
-
+View(data)
 
 write_tsv(data, file = str_c(data_dir, '02_dat_clean.tsv.gz'))
 ```
@@ -163,6 +161,18 @@ This attribute is a factor (healthy or ill), indicating whether the patient has 
 # Augment data
 
 ```{R}
+data <- read_tsv('../data/02_dat_clean.tsv.gz', col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BP = col_integer(),
+  Skin_thick = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DPF = col_number(),
+  Age_onset = col_integer(),
+  Outcome = col_factor()
+  ))
+  
 data <- data |>
   mutate(BMI_class = case_when(
     18.5 > BMI ~ "Underweight",
@@ -178,7 +188,25 @@ write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
 
 ## Analyse data
 
-Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
+```{r}
+data <- read_tsv('../data/03_dat_aug.tsv.gz', col_types = cols(
+  Pregnancies = col_integer(),
+  Glucose = col_integer(),
+  BP = col_integer(),
+  Skin_thick = col_integer(),
+  Insulin = col_integer(),
+  BMI = col_number(),
+  DPF = col_number(),
+  Age_onset = col_integer(),
+  Outcome = col_factor()
+  ))
+
+#Analyzing the correlation between Obesity and diabetes
+
+data |>
+   select(BMI_class, Outcome)
+```
+
 
 ### Boxplots
 
@@ -254,7 +282,7 @@ correlation_matrix <- cor(data_clean_from_nas)
 
 corrplot(correlation_matrix, method = "color", type = "full", order = "hclust", 
          tl.col = "black", 
-         col = colorRampPalette(c("#ffffff", "#003f5c", "#7a5195", "#ef5675", "#ffa600"))(200),
+         col = colorRampPalette(c("#ffffff", "#ef5675", "#7a5195"))(200),
          addCoef.col = "black", number.cex = 0.7,
          title = "Correlation Heatmap",
          mar = c(0,0,2,0), # Adjusting margins
@@ -264,8 +292,6 @@ corrplot(correlation_matrix, method = "color", type = "full", order = "hclust",
 ```
 
 ### Linear Regression: Skin Thickness vs Blood Pressure
-
-aa
 
 ```{r}
 model <- lm(`Skin_thick` ~ BP, data = data)
@@ -317,4 +343,3 @@ pca_model |>
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component")
 ```
-
