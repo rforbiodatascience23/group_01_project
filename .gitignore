@@ -4,6 +4,7 @@ raw/*
 _raw/*
 **/_raw/*
 **/data/*
+**/*.png
 
 # History files
 .Rhistory
