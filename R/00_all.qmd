@@ -252,7 +252,7 @@ head(data)
 
 ```{r}
 density_age <- ggplot(data, aes(y = Age_range)) +
-    geom_bar() +
+    geom_bar(fill = "#7a5195") +
     theme_minimal() +
     coord_flip()
 
