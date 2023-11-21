@@ -23,6 +23,7 @@ editor: visual
 {{< include 04_describe.qmd >}}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```{r}
 #| echo: true
 #| message: true
@@ -334,4 +335,6 @@ pca_model |>
 
 =======
 >>>>>>> 5356400d182f59c9084fe640d2c58036640b23cb
+=======
+>>>>>>> 09977bf1c1c4253390e9a7ec214b01d726b71870
 {{< include 05_analysis.qmd >}}

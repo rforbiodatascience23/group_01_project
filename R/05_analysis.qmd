@@ -61,7 +61,7 @@ Age_onset <- Boxplots("Age_onset") +
     labs(y = "Age Onset")
 
 combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
-    plot_layout(guides = 'collect', ncol = 4) 
+    plot_layout(guides = 'collect', ncol = 4)
 
 combination_plot
 ```
@@ -144,7 +144,9 @@ pca_model |>
         theme_minimal() +
         scale_colour_manual(values = c("#F44336", "#03A9F4")) +
         labs(x = "PCA component 1", y = "PCA component 2",
-             title = "Principal component analysis")
+             title = "Principal component analysis") + 
+        theme(plot.title = element_text(hjust = 0.5))
+
 ```
 
 ### Variance explained
@@ -160,7 +162,8 @@ pca_model |>
         scale_y_continuous(labels = scales::percent_format()) +
         theme_minimal() +
         labs(x = "Principal components", y = "Variance explained",
-             title = "Variance explained by each principal component")
+             title = "Variance explained by each principal component") + 
+        theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ### BMI class distribution
@@ -168,4 +171,3 @@ pca_model |>
 ```{r}
 
 ```
-
