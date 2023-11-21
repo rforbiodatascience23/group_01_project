@@ -142,21 +142,25 @@ ggsave("../results/density_age.png")
 ### Correlation Heatmap
 
 ```{r}
-data_clean_from_nas <- data |>
-    drop_na() |>
-    select(where(is.numeric))
+data_clean_from_nas <- data %>%
+  drop_na() %>%
+  select(where(is.numeric))
+
 
 correlation_matrix <- cor(data_clean_from_nas)
 
-corrplot(correlation_matrix, method = "color", type = "full", order = "hclust", 
-         tl.col = "black", 
-         col = colorRampPalette(c("#ffffff", "#ef5675", "#7a5195"))(200),
-         addCoef.col = "black", number.cex = 0.7,
-         title = "Correlation Heatmap",
-         mar = c(0,0,2,0), # Adjusting margins
-         tl.pos = "lt", # Changing text labels position to left-top
-         tl.offset = 0.5 # Adjusting text label position
-)
+
+correlation_data <- as.data.frame(as.table(correlation_matrix))
+colnames(correlation_data) <- c("Var1", "Var2", "Correlation")
+
+
+ggplot(correlation_data, aes(Var1, Var2, fill = Correlation, label = sprintf("%.2f", Correlation))) +
+  geom_tile(color = "white") +
+  geom_text(color = "black", size = 3) +  # Add text labels
+  scale_fill_gradientn(colors = colorRampPalette(c("#ffffff", "#ef5675", "#7a5195"))(200), na.value = "white") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Correlation Heatmap")
 ggsave("../results/heatmap.png")
 
 ```
@@ -226,15 +230,34 @@ ggsave("../results/PCA_Var.png")
 ### BMI class distribution
 
 ```{r}
-rows <- nrow(data)
-id <- seq(1, rows, by=1)
 
-pivot_data <- data |>
-  select(BMI_class, BMI) |>
-  mutate(id) |> 
+rows <- nrow(data)
+id <- seq(1, rows, by = 1)
+
+pivot_data <- data %>%
+  select(BMI_class, BMI) %>%
+  mutate(id) %>%
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
-              id_cols = id) |> 
+              id_cols = id) %>%
+  select(-id, -"NA")
+
+non_na_counts <- colSums(!is.na(pivot_data[, !(names(pivot_data) %in% c("id", "NA"))]))
+
+# Create a data frame for ggplot
+pivot_data_plot <- data.frame(columns = names(non_na_counts), count = non_na_counts)
+
+
+# Plot using ggplot2
+ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7, color = "black") +
+  labs(
+    title = "Number of diabetes cases in different BMI class",
+    y = "Count"
+  ) +
+  theme_minimal() 
+
+id_cols = id) |> 
   select(c(-id,-"NA"))
 
 head(pivot_data)
