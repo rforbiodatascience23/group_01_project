@@ -175,7 +175,8 @@ pivot_data <- data |>
   mutate(id) |> 
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
-              id_cols = id) #|> 
+              id_cols = id) |> 
   select(c(-id,-"NA"))
-View(pivot_data)
+  
+head(pivot_data)
 ```
