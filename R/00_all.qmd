@@ -187,11 +187,6 @@ data <- data |>
 
 view(data)
 
-write_tsv(data, file = '../data/03_dat_aug.tsv.gz')
-
-# Work with "data"
-# ...
-
 write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
 ```
 
