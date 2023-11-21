@@ -30,6 +30,7 @@ data |>
 ### Boxplots
 
 ```{r}
+#| warning: false
 Boxplots <- function(attribute) {
     Boxplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
                geom_boxplot() +
@@ -69,13 +70,14 @@ combination_plot
 ### Violin Plots
 
 ```{r}
+#| warning: false
 Violinplots <- function(attribute) {
     Violinplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
-               geom_violin() +
+               geom_violin(fill="#A4A4A4", color="darkred") +
                theme_minimal() +
                labs(x = NULL, y = attribute) + 
-               stat_summary(fun.data=mean_sdl, mult=1, 
-                 geom="pointrange", color="red")
+               geom_boxplot(width=0.1) + 
+               stat_summary(fun.y=mean, geom="point", size=2, color="red")
     return(Violinplot)
 }
 
