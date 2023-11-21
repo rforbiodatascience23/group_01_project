@@ -27,7 +27,6 @@ data |>
    select(BMI_class, Outcome)
 ```
 
-
 ### Boxplots
 
 ```{r}
