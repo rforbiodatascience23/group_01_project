@@ -73,7 +73,7 @@ combination_plot
 #| warning: false
 Violinplots <- function(attribute) {
     Violinplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
-               geom_violin(fill="#A4A4A4", color="darkred") +
+               geom_violin(fill="#03A9F4") +
                theme_minimal() +
                labs(x = NULL, y = attribute) + 
                geom_boxplot(width=0.2) + 
