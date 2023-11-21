@@ -83,7 +83,7 @@ head(data)
 
 ```{r}
 density_age <- ggplot(data, aes(y = Age_range)) +
-    geom_bar(fill = "purple") +
+    geom_bar(fill = "#7a5195") +
     theme_minimal() +
     labs(x = "Age Range", y = "Count", title = "Age distribution in the dataset")+
     coord_flip()
