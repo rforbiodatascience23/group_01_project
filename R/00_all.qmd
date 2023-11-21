@@ -303,8 +303,8 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
        title = "Linear Regression: Skin Thickness vs Blood Pressure",
        subtitle = "Relationship between Skin Thickness and Blood Pressure") +
   theme_minimal() +  
-  theme(plot.title = element_text(size = 18, face = "bold"),
-        plot.subtitle = element_text(size = 14, color = "grey")) +
+  theme(plot.title = element_text(size = 14, face = "bold"),
+        plot.subtitle = element_text(size = 10, color = "black")) +
   guides(color = guide_legend(title = NULL)) 
 ```
 
