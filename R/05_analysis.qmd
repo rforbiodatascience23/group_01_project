@@ -157,11 +157,12 @@ corrplot(correlation_matrix, method = "color", type = "full", order = "hclust",
 ### Linear Regression: Skin Thickness vs Blood Pressure
 
 ```{r}
+#| warning: false
 model <- lm(`Skin_thick` ~ BP, data = data)
 
 ggplot(data, aes(x = BP, y = Skin_thick)) +
   geom_point(color = "steelblue", alpha = 0.7, size = 3) +  
-  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.5) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.5, formula = 'y ~ x') + 
   labs(x = "Blood Pressure", y = "Skin Thickness", 
        title = "Linear Regression: Skin Thickness vs Blood Pressure",
        subtitle = "Relationship between Skin Thickness and Blood Pressure") +
