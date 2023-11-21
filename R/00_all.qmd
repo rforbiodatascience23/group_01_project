@@ -22,8 +22,6 @@ editor: visual
 #| echo: true
 #| message: true
 
-install.packages("corrplot")
-
 library("broom")
 library("patchwork")
 library("purrr")
