@@ -298,9 +298,9 @@ pca_model |>
     tidy(matrix = "eigenvalues") |>
     ggplot(aes(PC, percent)) +
         geom_col(width = 0.6, fill = "#03A9F4") +
-        scale_x_continuous(breaks = 1:9) +
+        scale_x_continuous(breaks = 1:8) +
         scale_y_continuous(labels = scales::percent_format()) +
         theme_minimal() +
-        labs(x = "Principal component", y = "Variance explained",
+        labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component")
 ```
