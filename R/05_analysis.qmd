@@ -66,6 +66,47 @@ combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + D
 combination_plot
 ```
 
+### Violin Plots
+
+```{r}
+Violinplots <- function(attribute) {
+    Violinplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
+               geom_violin() +
+               theme_minimal() +
+               labs(x = NULL, y = attribute) + 
+               stat_summary(fun.data=mean_sdl, mult=1, 
+                 geom="pointrange", color="red")
+    return(Violinplot)
+}
+
+Pregnancies <- Violinplots("Pregnancies") +
+    labs(title = paste("Violin plots of all the attributes"))
+
+Glucose <- Violinplots("Glucose")
+
+BP <- Violinplots("BP")+
+    labs(y = "Blood Pressure")
+
+Skin_thick <- Violinplots("Skin_thick") +
+    labs(y = "Skin Thickness")
+
+Insulin <- Violinplots("Insulin")
+
+BMI <- Violinplots("BMI")+
+    labs(y = "Body Mass Index")
+
+DPF <- Violinplots("DPF") +
+    labs(y = "Diabetes Ped. Func.")
+
+Age_onset <- Violinplots("Age_onset") +
+    labs(y = "Age Onset")
+
+combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
+    plot_layout(guides = 'collect', ncol = 4) 
+
+combination_plot
+```
+
 ### Add "age_ranges" column with the age of onset values in ranges in intervals of 10
 
 ```{r}
@@ -128,7 +169,7 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
   guides(color = guide_legend(title = NULL)) 
 ```
 
-## Principal component analysis
+### Principal component analysis
 
 ```{r}
 pca_data <- data |>
@@ -145,7 +186,8 @@ pca_model |>
         theme_minimal() +
         scale_colour_manual(values = c("#03A9F4", "#F44336")) +
         labs(x = "PCA component 1", y = "PCA component 2",
-             title = "Principal component analysis")
+             title = "Principal component analysis") + 
+        theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ### Variance explained
@@ -161,7 +203,8 @@ pca_model |>
         scale_y_continuous(labels = scales::percent_format()) +
         theme_minimal() +
         labs(x = "Principal components", y = "Variance explained",
-             title = "Variance explained by each principal component")
+             title = "Variance explained by each principal component") + 
+        theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ### BMI class distribution
@@ -177,6 +220,6 @@ pivot_data <- data |>
               values_from = BMI,
               id_cols = id) |> 
   select(c(-id,-"NA"))
-  
+
 head(pivot_data)
 ```
