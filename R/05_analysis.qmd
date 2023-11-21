@@ -235,7 +235,6 @@ pivot_data <- data %>%
   mutate(id) %>%
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
-<<<<<<< HEAD
               id_cols = id) %>%
   select(-id, -"NA")
 
@@ -254,10 +253,8 @@ ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
   ) +
   theme_minimal() 
 
-=======
-              id_cols = id) |> 
+id_cols = id) |> 
   select(c(-id,-"NA"))
 
 head(pivot_data)
->>>>>>> f8065a4c43adf82e069402271d3c5917a4902f83
 ```
