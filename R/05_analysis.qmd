@@ -142,7 +142,7 @@ pca_model |>
     ggplot(aes(.fittedPC1, .fittedPC2, color = Outcome)) +
         geom_point(size = 1.8, alpha = 0.6) +
         theme_minimal() +
-        scale_colour_manual(values = c("#03A9F4", "#F44336")) +
+        scale_colour_manual(values = c("#F44336", "#03A9F4")) +
         labs(x = "PCA component 1", y = "PCA component 2",
              title = "Principal component analysis")
 ```
