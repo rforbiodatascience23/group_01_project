@@ -166,10 +166,15 @@ pca_model |>
 ### BMI class distribution
 
 ```{r}
-data |>
-  select(BMI_class, BMI) |>
-  pivot_wider(names_from = BMI_class,
-              values_from = BMI) |>
-  view()
-```
+rows <- nrow(data)
+id <- seq(1, rows, by=1)
 
+pivot_data <- data |>
+  select(BMI_class, BMI) |>
+  mutate(id) |> 
+  pivot_wider(names_from = BMI_class,
+              values_from = BMI,
+              id_cols = id) |> 
+  select(c(-id,-"NA"))
+View(pivot_data)
+```
