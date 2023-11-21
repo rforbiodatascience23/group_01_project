@@ -177,13 +177,6 @@ write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
 ```
 
 ## Analyse data
-```{r}
-#Analyzing the correlation between Obesity and diabetes
-
-data |>
-   select(BMI_class, Outcome)
-```
-
 
 Change age_onset to age ranges. Change Outcome variable to Diabetic (1) and Non-diabtic (0).
 
