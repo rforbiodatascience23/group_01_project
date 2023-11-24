@@ -154,7 +154,7 @@ correlation_data <- as.data.frame(as.table(correlation_matrix))
 colnames(correlation_data) <- c("Var1", "Var2", "Correlation")
 
 
-ggplot(correlation_data, aes(Var1, Var2, fill = Correlation, label = sprintf("%.2f", Correlation))) +
+heatmap <- ggplot(correlation_data, aes(Var1, Var2, fill = Correlation, label = sprintf("%.2f", Correlation))) +
   geom_tile(color = "white") +
   geom_text(color = "black", size = 3) +  # Add text labels
   scale_fill_gradientn(colors = colorRampPalette(c("#ffffff", "#ef5675", "#7a5195"))(200), na.value = "white") +
