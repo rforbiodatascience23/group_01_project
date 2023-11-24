@@ -1,0 +1,38 @@
+---
+title: "Diabetes Type II Indian dataset Project"
+author: "Group 01"
+format: 
+  revealjs:
+    theme: dark
+    logo: dtu_logo.png
+    css: logo.css
+---
+
+# Members
+
+-   Anna Lifousi (`s232979`)
+-   Jordan Sylvester Fernandes (`s222497`)
+-   Manuel Arcieri (`s230158`)
+-   Quim Bech Vilaseca (`s233374`)
+-   Xavier Viñas Margalef (`s233532`)
+
+# Introduction
+
+
+
+
+
+
+
+
+# Materials and Methods
+
+
+
+
+
+
+
+
+# Results and Discussion
+

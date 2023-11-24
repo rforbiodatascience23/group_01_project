@@ -163,6 +163,7 @@ heatmap <- ggplot(correlation_data, aes(Var1, Var2, fill = Correlation, label = 
   labs(title = "Correlation Heatmap")
 ggsave("../results/heatmap.png")
 
+heatmap
 ```
 
 ### Linear Regression: Skin Thickness vs Blood Pressure
