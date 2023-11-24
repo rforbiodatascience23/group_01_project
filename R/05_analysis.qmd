@@ -257,9 +257,6 @@ ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
   ) +
   theme_minimal() 
 
-id_cols = id) |> 
-  select(c(-id,-"NA"))
-
 head(pivot_data)
 ```
 
