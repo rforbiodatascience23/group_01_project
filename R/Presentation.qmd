@@ -19,16 +19,11 @@ format:
 
 - Diabetes is estimated to affect approximately 530 million adults worldwide, with a global prevalence of 10.5 percent among adults aged 20 to 79 years. ^[IDF Diabetes Atlas 2021, 10th edition https://diabetesatlas.org/atlas/tenth-edition/ (Accessed on January 17, 2022)]
 
-- Type 2 diabetes represents approximately 98 percent of global diabetes diagnoses, although this proportion varies widely among countries.
-
-- Career backgrounds of the group.
+- Type 2 diabetes represents approximately 98 percent of global diabetes diagnoses, although this proportion varies widely among 
 
 - Interesting, large and useful data set to work with.
 
-
-
-
-
+- Career backgrounds of the group.
 
 
 # Materials and Methods
