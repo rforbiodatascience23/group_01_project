@@ -63,11 +63,9 @@ data <- data |>
 head(data)
 ```
 
-
 ### Save it into a TSV file
 
 ```{R}
 write_tsv(data, file = str_c(data_dir, '03_dat_aug.tsv.gz'))
 
 ```
-
