@@ -39,7 +39,7 @@ Correlation heatmap
 
 ::: {.column width="40%"}
 - Strong correlation between BMI and skin thickness
-- Weak correlation between insulin and glucose levels
+- Weak correlation between insulin and glucose levelsj
 :::
 
 ::: {.column width="60%"}
