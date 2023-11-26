@@ -1,9 +1,9 @@
 # Group 1, final project
 
-## Project Contributors
+## Project contributors
 
 |         Full name          | Student ID |                  GitHub username                  |
-|:--------------------------:|:----------:|:-------------------------------------------------:|
+|:------------------:|:--------------:|:-----------------------------------:|
 |        Anna Lifousi        | `s232979`  |   [annalifousi](https://github.com/annalifousi)   |
 | Jordan Sylvester Fernandes | `s222497`  |    [jordanfdes](https://github.com/jordanfdes)    |
 |       Manuel Arcieri       | `s230158`  | [ManuelArcieri](https://github.com/ManuelArcieri) |
