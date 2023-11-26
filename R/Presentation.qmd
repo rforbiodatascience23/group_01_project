@@ -1,13 +1,13 @@
 ---
-title: "Diabetes Type II Indian dataset Project"
-author: "Group 01"
+title: "Diabetes Type II Indian dataset project"
+author: "Group 1"
 format: 
   revealjs:
+    embed-resources: true
     theme: dark
-    logo: dtu_logo.png
 ---
 
-# Members
+## Members
 
 -   Anna Lifousi (`s232979`)
 -   Jordan Sylvester Fernandes (`s222497`)
@@ -23,12 +23,22 @@ format:
 
 - Evaluate the possible factors that affect the appearance of Diabetes Type 2, for further control and prevention.
 
-# Materials and Methods
+## Materials and Methods
 
 ![](../results/violin_plot.png){.absolute top=200 left=0 width="350" height="300"}
 
 
+## Principal component analysis
 
+- After having scaled and centred the data, we performed PCA to test the correlation between multiple properties in a two-dimensional space.
+
+## Principal component analysis
+
+![](../results/PCA.png)
+
+## Principal component analysis
+
+- As we can see, there's no clear separation between the two classes using the two best principal components.
 
 
 ## Results 
@@ -55,5 +65,5 @@ Relationship between BMI and diabetes
 
 
 
-# Discussion
+## Discussion
 

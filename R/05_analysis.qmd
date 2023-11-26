@@ -58,7 +58,7 @@ Age_onset <- Boxplots("Age_onset") +
 
 combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
     plot_layout(guides = 'collect', ncol = 4) 
-ggsave("../results/boxplot.png")
+ggsave("../results/boxplot.png", bg = "white")
 
 combination_plot
 ```
@@ -103,7 +103,7 @@ combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + D
     plot_layout(guides = 'collect', ncol = 4) 
 
 combination_plot
-ggsave("../results/violin_plot.png")
+ggsave("../results/violin_plot.png", bg = "white")
 
 ```
 
@@ -130,7 +130,7 @@ density_age <- ggplot(data, aes(y = Age_range)) +
     coord_flip()
 
 density_age
-ggsave("../results/density_age.png")
+ggsave("../results/density_age.png", bg = "white")
 
 ```
 
@@ -156,7 +156,7 @@ heatmap <- ggplot(correlation_data, aes(Var1, Var2, fill = Correlation, label = 
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Correlation Heatmap")
-ggsave("../results/heatmap.png")
+ggsave("../results/heatmap.png", bg = "white")
 
 heatmap
 ```
@@ -177,7 +177,7 @@ ggplot(data, aes(x = BP, y = Skin_thick)) +
   theme(plot.title = element_text(size = 14, face = "bold"),
         plot.subtitle = element_text(size = 10, color = "black")) +
   guides(color = guide_legend(title = NULL))
-ggsave("../results/linear_reg.png")
+ggsave("../results/linear_reg.png", bg = "white")
 
 ```
 
@@ -200,7 +200,7 @@ pca_model |>
         labs(x = "PCA component 1", y = "PCA component 2",
              title = "Principal component analysis") + 
         theme(plot.title = element_text(hjust = 0.5))
-ggsave("../results/PCA.png")
+ggsave("../results/PCA.png", bg = "white")
 
 ```
 
@@ -219,7 +219,7 @@ pca_model |>
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component") + 
         theme(plot.title = element_text(hjust = 0.5))
-ggsave("../results/PCA_Var.png")
+ggsave("../results/PCA_Var.png", bg = "white")
 
 ```
 
@@ -272,5 +272,5 @@ data |>
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-ggsave("../results/BMI_dia.png")
+ggsave("../results/BMI_dia.png", bg = "white")
 ```
