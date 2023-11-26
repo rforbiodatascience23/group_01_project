@@ -21,10 +21,7 @@ format:
 
 - Type 2 diabetes represents approximately 98 percent of global diabetes diagnoses, although this proportion varies widely among 
 
-- Interesting, large and useful data set to work with.
-
-- Career backgrounds of the group.
-
+- Evaluate the possible factors that affect the appearance of Diabetes Type 2, for further control and prevention.
 
 # Materials and Methods
 
