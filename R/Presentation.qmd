@@ -8,7 +8,7 @@ format:
     logo: dtu_logo.png
 ---
 
-# Members
+## Members
 
 -   Anna Lifousi (`s232979`)
 -   Jordan Sylvester Fernandes (`s222497`)
@@ -24,7 +24,7 @@ format:
 
 - Evaluate the possible factors that affect the appearance of Diabetes Type 2, for further control and prevention.
 
-# Materials and Methods
+## Materials and Methods
 
 ![](../results/violin_plot.png){.absolute top=200 left=0 width="350" height="300"}
 
@@ -44,5 +44,5 @@ Relationship between BMI and diabetes
 
 
 
-# Discussion
+## Discussion
 
