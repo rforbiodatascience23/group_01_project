@@ -1,8 +1,9 @@
 ---
-title: "Diabetes Type II Indian dataset Project"
-author: "Group 01"
+title: "Diabetes Type II Indian dataset project"
+author: "Group 1"
 format: 
   revealjs:
+    embed-resources: true
     theme: dark
     logo: dtu_logo.png
 ---
