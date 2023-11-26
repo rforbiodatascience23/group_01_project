@@ -5,7 +5,6 @@ format:
   revealjs:
     embed-resources: true
     theme: dark
-    logo: dtu_logo.png
 ---
 
 ## Members
@@ -29,7 +28,17 @@ format:
 ![](../results/violin_plot.png){.absolute top=200 left=0 width="350" height="300"}
 
 
+## Principal component analysis
 
+- After having scaled and centred the data, we performed PCA to test the correlation between multiple properties in a two-dimensional space.
+
+## Principal component analysis
+
+![](../results/PCA.png)
+
+## Principal component analysis
+
+- As we can see, there's no clear separation between the two classes using the two best principal components.
 
 
 ## Results 
