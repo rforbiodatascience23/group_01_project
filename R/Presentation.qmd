@@ -24,8 +24,18 @@ format:
 - Evaluate the possible factors that affect the appearance of Diabetes Type 2, for further control and prevention.
 
 ## Materials and Methods
+### Data Acquisition and Description
 
-![](../results/violin_plot.png){.absolute top=200 left=0 width="350" height="300"}
+![](../results/violin_plot.png)
+
+## Materials and Methods
+### Data Cleaning, Augmentation and Analysis
+
+-   Data Loading: Automatic data loading from server.
+-   Data Cleaning: Several zero values treated as NA. In the case of Insulin, only treated as NA if the patient was diabetic.
+-   Data Augmentation: Columns renamed to improve clarity and new categories created for BMI and Age.
+-   Data Description & Analysis: Data analyzed and visualized statistically and graphically. Use of Principal Component Analysis to understand correlation between variables.
+
 
 
 # Results 
