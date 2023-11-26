@@ -4,6 +4,8 @@ raw/*
 _raw/*
 **/_raw/*
 **/data/*
+**/Project_files/*
+*.html
 
 
 # History files
