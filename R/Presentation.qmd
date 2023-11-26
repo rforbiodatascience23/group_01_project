@@ -28,14 +28,22 @@ format:
 ![](../results/violin_plot.png){.absolute top=200 left=0 width="350" height="300"}
 
 
-## Results 
+# Results 
 
-Correlation heatmap
+##Correlation heatmap
 
-![](../results/heatmap.png){.absolute top=200 left=0 width="560" height="480"}
----
+:::: {.columns}
 
-Relationship between BMI and diabetes
+::: {.column width="40%"}
+- Strong correlation between BMI and skin thickness
+- Weak correlation between insulin and glucose levelsj
+:::
+
+::: {.column width="60%"}
+![](../results/heatmap.png){.absolute top=100 right=0 width="560" height="480"}
+:::
+
+::::
 
 ## Principal component analysis
 
@@ -66,27 +74,5 @@ Relationship between BMI and diabetes
 - To reach at least 90%, we would have to include 6 PC out of 8.
 
 
-## Results 
-
-Correlation heatmap
-
-:::: {.columns}
-
-::: {.column width="40%"}
-- Strong correlation between BMI and skin thickness
-- Weak correlation between insulin and glucose levelsj
-:::
-
-::: {.column width="60%"}
-![](../results/heatmap.png){.absolute top=100 right=0 width="560" height="480"}
-:::
-
-::::
-
----
-
-## Relationship between BMI and diabetes
-
-
-## Discussion
+# Discussion
 
