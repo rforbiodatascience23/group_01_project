@@ -59,32 +59,37 @@ format:
 
 ## Principal component analysis
 
-- After having scaled and centred the data, we performed PCA to test the correlation between multiple properties in a two-dimensional space.
+:::: {.columns}
 
-## Principal component analysis
+::: {.column width="35%"}
+::: {.r-fit-text}
+- The data was scaled and centred before performing PCA.
 
-::: {.center}
-![](../results/PCA.png)
-:::
-
-## Principal component analysis
-
-- As we can see, there's no clear separation between the two classes using the two best principal components.
-
-- The reason can be traced back to how much variance is explained by each principal component.
-
-## Principal component analysis
-
-::: {.center}
-![](../results/PCA_Var.png)
-:::
-
-## Principal component analysis
+- There's no clear separation between the two classes using only the two best PC.
 
 - The first two principal components only account for around 50% of the total variance.
 
 - To reach at least 90%, we would have to include 6 PC out of 8.
+:::
+:::
+
+::: {.column width="65%"}
+::: {.center}
+![](../results/PCA.png)
+![](../results/PCA_Var.png)
+:::
+:::
+::::
 
 
-# Discussion
+## Discussion
 
+- We analysed a dataset containing clinical data about 768 patients, some of them suffering from diabetes.
+
+- While we've found some correlation between individual properties, it's hard to tell whether someone is ill just from a subset of features.
+
+- We've found a linear correlation between blood pressure and skin thickness.
+
+- PCA couldn't separate ill individuals from healthy people using only the two best PC.
+
+- Obesity is a risk factor for diabetes.

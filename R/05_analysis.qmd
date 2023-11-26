@@ -57,7 +57,8 @@ Age_onset <- Boxplots("Age_onset") +
     labs(y = "Age Onset")
 
 combination_plot <- (Pregnancies + Glucose + BP + Skin_thick + Insulin + BMI + DPF + Age_onset) +
-    plot_layout(guides = 'collect', ncol = 4) 
+    plot_layout(guides = 'collect', ncol = 4)
+
 ggsave("../results/boxplot.png", bg = "white")
 
 combination_plot
@@ -69,11 +70,12 @@ combination_plot
 #| warning: false
 Violinplots <- function(attribute) {
     Violinplot <- ggplot(data, aes(x = 1, y = data[[attribute]])) +
-               geom_violin(fill="#03A9F4", alpha = 0.5) +
+               geom_violin(fill = "#03A9F4", alpha = 0.5) +
                theme_minimal() +
                labs(x = NULL, y = attribute) + 
-               geom_boxplot(width=0.2) + 
-               stat_summary(fun.y=mean, geom="point", size=2, color="red")
+               geom_boxplot(width = 0.2) + 
+               stat_summary(fun.y = mean, geom = "point",
+                            size = 2, color = "red")
     return(Violinplot)
 }
 
@@ -115,7 +117,7 @@ age_ranges <- c(18, 29, 39, 49, 59, 69, 79, 89, 99)
 age_range_labels <- c("18-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-100")
 
 data <- data |> 
-    mutate(Age_range = cut(Age_onset, breaks = age_ranges, labels=age_range_labels))
+    mutate(Age_range = cut(Age_onset, breaks = age_ranges, labels = age_range_labels))
 
 head(data)
 ```
@@ -137,8 +139,8 @@ ggsave("../results/density_age.png", bg = "white")
 ### Correlation Heatmap
 
 ```{r}
-data_clean_from_nas <- data %>%
-  drop_na() %>%
+data_clean_from_nas <- data |>
+  drop_na() |>
   select(where(is.numeric))
 
 
@@ -149,10 +151,12 @@ correlation_data <- as.data.frame(as.table(correlation_matrix))
 colnames(correlation_data) <- c("Var1", "Var2", "Correlation")
 
 
-heatmap <- ggplot(correlation_data, aes(Var1, Var2, fill = Correlation, label = sprintf("%.2f", Correlation))) +
+heatmap <- ggplot(correlation_data, aes(Var1, Var2, fill = Correlation,
+                                        label = sprintf("%.2f", Correlation))) +
   geom_tile(color = "white") +
-  geom_text(color = "black", size = 3) +  # Add text labels
-  scale_fill_gradientn(colors = colorRampPalette(c("#ffffff", "#ef5675", "#7a5195"))(200), na.value = "white") +
+  geom_text(color = "black", size = 3) +
+  scale_fill_gradientn(colors = colorRampPalette(c("#ffffff", "#ef5675", "#7a5195"))(200),
+                       na.value = "white") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Correlation Heatmap")
@@ -200,7 +204,7 @@ pca_model |>
         labs(x = "PCA component 1", y = "PCA component 2",
              title = "Principal component analysis") + 
         theme(plot.title = element_text(hjust = 0.5))
-ggsave("../results/PCA.png", bg = "white")
+ggsave("../results/PCA.png", bg = "white", width = 10, height = 5)
 
 ```
 
@@ -212,14 +216,14 @@ Goal: predict diabetic or non-diabetic. PCA : with the outcome variable.
 pca_model |>
     tidy(matrix = "eigenvalues") |>
     ggplot(aes(PC, percent)) +
-        geom_col(width = 0.6, fill = "#03A9F4") +
+        geom_col(width = 0.5, fill = "#03A9F4") +
         scale_x_continuous(breaks = 1:8) +
         scale_y_continuous(labels = scales::percent_format()) +
         theme_minimal() +
         labs(x = "Principal components", y = "Variance explained",
              title = "Variance explained by each principal component") + 
         theme(plot.title = element_text(hjust = 0.5))
-ggsave("../results/PCA_Var.png", bg = "white")
+ggsave("../results/PCA_Var.png", bg = "white", width = 10, height = 4)
 
 ```
 
@@ -230,26 +234,24 @@ ggsave("../results/PCA_Var.png", bg = "white")
 rows <- nrow(data)
 id <- seq(1, rows, by = 1)
 
-pivot_data <- data %>%
-  select(BMI_class, BMI) %>%
-  mutate(id) %>%
+pivot_data <- data |>
+  select(BMI_class, BMI) |>
+  mutate(id) |>
   pivot_wider(names_from = BMI_class,
               values_from = BMI,
-              id_cols = id) %>%
+              id_cols = id) |>
   select(-id, -"NA")
 
 non_na_counts <- colSums(!is.na(pivot_data[, !(names(pivot_data) %in% c("id", "NA"))]))
 
-# Create a data frame for ggplot
 pivot_data_plot <- data.frame(columns = names(non_na_counts), count = non_na_counts)
 
-
-# Plot using ggplot2
 ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
-  geom_bar(stat = "identity", position = "dodge", width = 0.7, color = "black") +
+  geom_bar(stat = "identity", position = "dodge",
+           width = 0.7, color = "black") +
   labs(
-    title = "Number of diabetes cases in different BMI class",
-    y = "Count"
+      title = "Number of diabetes cases in different BMI class",
+      y = "Count"
   ) +
   theme_minimal() 
 
