@@ -85,6 +85,14 @@ format:
 
 - To reach at least 90%, we would have to include 6 PC out of 8.
 
+## BMI class distribution
+- Reveals the distribution of diabetes cases across distinct BMI categories.
+- Provides a clear depiction of diabetes prevalence among various BMI groups.
+- Illustrates the correlation between Body Mass Index (BMI) and diabetes occurrences.
 
+## BMI class distribution
+::: {.center}
+![](../results/BMI_class.png)
+:::
 # Discussion
 

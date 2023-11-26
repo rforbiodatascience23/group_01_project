@@ -254,6 +254,7 @@ ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
   theme_minimal() 
 
 head(pivot_data)
+ggsave("../results/BMI_class.png", bg = "white")
 ```
 
 ### Any relation between BMI and diabetes
