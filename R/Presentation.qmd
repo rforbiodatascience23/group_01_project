@@ -66,5 +66,27 @@ Relationship between BMI and diabetes
 - To reach at least 90%, we would have to include 6 PC out of 8.
 
 
+## Results 
+
+Correlation heatmap
+
+:::: {.columns}
+
+::: {.column width="40%"}
+- Strong correlation between BMI and skin thickness
+- Weak correlation between insulin and glucose levelsj
+:::
+
+::: {.column width="60%"}
+![](../results/heatmap.png){.absolute top=100 right=0 width="560" height="480"}
+:::
+
+::::
+
+---
+
+## Relationship between BMI and diabetes
+
+
 ## Discussion
 
