@@ -1,7 +1,8 @@
 ---
-title: "presentation.qmd"
-format: revealjs
-editor: visual
+title: "Presentation"
+format:
+  revealjs:
+    embed-resources: true
 ---
 
 ## Quarto
