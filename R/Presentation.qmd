@@ -30,7 +30,9 @@ format:
 
 # Results 
 
-##Correlation heatmap
+---
+
+## Correlation heatmap
 
 :::: {.columns}
 
