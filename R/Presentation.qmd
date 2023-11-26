@@ -31,11 +31,11 @@ format:
 
 
 
-# Results 
+## Results 
 
 Correlation heatmap
 
-![](../results/heatmap.png){.absolute top=200 left=0 width="350" height="300"}
+![](../results/heatmap.png){.absolute top=200 left=0 width="560" height="480"}
 ---
 
 Relationship between BMI and diabetes
