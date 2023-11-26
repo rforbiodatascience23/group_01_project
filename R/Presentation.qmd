@@ -37,8 +37,8 @@ format:
 :::: {.columns}
 
 ::: {.column width="40%"}
-- Strong correlation between BMI and skin thickness
-- Weak correlation between insulin and glucose levelsj
+- Expected strong correlation between BMI and skin thickness, since skin layer thickness increases with BMI increase
+- Weak correlation between insulin and glucose levels, possibly since insulin levels increase when glucose levels rise in the blood durng the OGTT.
 :::
 
 ::: {.column width="60%"}
