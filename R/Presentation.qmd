@@ -35,7 +35,19 @@ format:
 
 Correlation heatmap
 
-![](../results/heatmap.png){.absolute top=200 left=0 width="560" height="480"}
+:::: {.columns}
+
+::: {.column width="40%"}
+- Strong correlation between BMI and skin thickness
+- Weak correlation between insulin and glucose levels
+:::
+
+::: {.column width="60%"}
+![](../results/heatmap.png){.absolute top=100 right=0 width="560" height="480"}
+:::
+
+::::
+
 ---
 
 Relationship between BMI and diabetes
