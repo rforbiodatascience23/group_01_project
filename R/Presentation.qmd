@@ -34,11 +34,27 @@ format:
 
 ## Principal component analysis
 
+::: {.center}
 ![](../results/PCA.png)
+:::
 
 ## Principal component analysis
 
 - As we can see, there's no clear separation between the two classes using the two best principal components.
+
+- The reason can be traced back to how much variance is explained by each principal component.
+
+## Principal component analysis
+
+::: {.center}
+![](../results/PCA_Var.png)
+:::
+
+## Principal component analysis
+
+- The first two principal components only account for around 50% of the total variance.
+
+- To reach at least 90%, we would have to include 6 PC out of 8.
 
 
 ## Results 
