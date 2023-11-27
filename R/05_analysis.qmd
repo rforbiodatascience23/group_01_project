@@ -258,5 +258,3 @@ ggplot(pivot_data_plot, aes(x = columns, y = count, fill = columns)) +
 head(pivot_data)
 ggsave("../results/BMI_class.png", bg = "white")
 ```
-
-
