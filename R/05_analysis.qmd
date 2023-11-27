@@ -259,21 +259,4 @@ head(pivot_data)
 ggsave("../results/BMI_class.png", bg = "white")
 ```
 
-### Any relation between BMI and diabetes
 
-```{r}
-data |>
-  select(BMI_class, Outcome) |>
-  drop_na() |>
-  filter(Outcome == "ill") |>
-  ggplot(mapping = aes(x = BMI_class,
-                       fill = BMI_class)) +
-  geom_bar(position = "dodge") +
-  labs(title = "Number of ill subjects in each BMI class",
-       y = "Count",
-       x = "BMI class") +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
-
-ggsave("../results/BMI_dia.png", bg = "white")
-```
