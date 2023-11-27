@@ -92,12 +92,6 @@ Source: https://www.kaggle.com/datasets/mathchi/diabetes-data-set
 ::::
 
 
-## Discussion
-
-- We analysed a dataset containing clinical data about 768 patients, some of them suffering from diabetes.
-
-- While we've found some correlation between individual properties, it's hard to tell whether someone is ill just from a subset of features.
-
 
 ## BMI class distribution
 :::: {.columns}
@@ -116,11 +110,14 @@ Source: https://www.kaggle.com/datasets/mathchi/diabetes-data-set
 :::
 :::
 ::::
-# Discussion
-=======
+## Discussion
+
 - We've found a linear correlation between blood pressure and skin thickness.
 
 - PCA couldn't separate ill individuals from healthy people using only the two best PC.
->>>>>>> 665197c210cb0a0f9e6f49a36c06f9dcb2d0ec9b
 
 - Obesity is a risk factor for diabetes.
+
+- We analysed a dataset containing clinical data about 768 patients, some of them suffering from diabetes.
+
+- While we've found some correlation between individual properties, it's hard to tell whether someone is ill just from a subset of features.
