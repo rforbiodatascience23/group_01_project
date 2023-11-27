@@ -12,9 +12,8 @@ editor: visual
 
 ```{r}
 #| echo: true
-#| message: true
+#| message: false
 library("broom")
-library("patchwork")
 library("purrr")
 library("readr")
 library("stringr")
