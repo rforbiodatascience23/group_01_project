@@ -23,16 +23,19 @@ format:
 
 - Evaluate the possible factors that affect the appearance of Diabetes Type 2, for further control and prevention.
 
-## Materials and Methods
-### Data Acquisition and Description
+# Materials and Methods
 
-![](../results/violin_plot.png){width=74%}
-https://www.kaggle.com/datasets/mathchi/diabetes-data-set
+::: {.r-fit-text}
+Source: https://www.kaggle.com/datasets/mathchi/diabetes-data-set
+:::
 
 
+## Data Acquisition and Description
 
-## Materials and Methods
-### Data Cleaning, Augmentation and Analysis
+![](../results/violin_plot.png)
+
+
+## Data Cleaning, Augmentation and Analysis
 
 -   Data Loading: Automatic data loading from server.
 -   Data Cleaning: Several zero values treated as NA. In the case of Insulin, only treated as NA if the patient was diabetic.
@@ -49,15 +52,19 @@ https://www.kaggle.com/datasets/mathchi/diabetes-data-set
 
 :::: {.columns}
 
-::: {.column width="45%"}
-- Expected strong correlation between BMI and skin thickness, since skin layer thickness increases with BMI increase
-- Weak correlation between insulin and glucose levels, possibly since insulin levels increase when glucose levels rise in the blood durng the OGTT.
+::: {.column width="40%"}
+::: {.r-fit-text}
+- Expected strong correlation between BMI and skin thickness, since skin layer thickness increases with BMI increase.
+
+- Weak correlation between insulin and glucose levels, possibly since insulin levels increase when glucose levels rise in the blood during the OGTT.
+:::
 :::
 
-::: {.column width="55%"}
-![](../results/heatmap.png){.absolute top=100 right=0 width="560" height="480"}
+::: {.column width="60%"}
+::: {.center}
+![](../results/heatmap.png)
 :::
-
+:::
 ::::
 
 ## Principal component analysis
