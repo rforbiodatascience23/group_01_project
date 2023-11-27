@@ -26,7 +26,10 @@ format:
 ## Materials and Methods
 ### Data Acquisition and Description
 
-![](../results/violin_plot.png)
+![](../results/violin_plot.png){width=74%}
+https://www.kaggle.com/datasets/mathchi/diabetes-data-set
+
+
 
 ## Materials and Methods
 ### Data Cleaning, Augmentation and Analysis
